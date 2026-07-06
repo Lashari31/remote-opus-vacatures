@@ -8,37 +8,32 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --green-900: #12291B;
+    --green-900: #0F2318;
     --green-800: #1A4731;
     --green-700: #235E40;
     --green-600: #2E7D52;
     --green-400: #6B8F7A;
-    --green-200: #CBDFD3;
-    --green-100: #E7F1EA;
-    --green-50:  #F0F6F1;
+    --green-200: #C8E0D4;
+    --green-100: #E8F5EE;
+    --green-50:  #F3FAF6;
 
-    --sand-100: #F3ECDD;
-    --sand-200: #E9DFC9;
-    --gold-600: #A9812F;
-
-    --body-bg:   #F6F3EC;
+    --body-bg:   #F4F8F5;
     --panel:     #FFFFFF;
-    --panel-2:   #FBFAF5;
-    --ink:       #1E2822;
-    --ink-soft:  #5C645C;
-    --line:      #ECE5D8;
+    --ink:       #17221C;
+    --ink-soft:  #56675E;
+    --line:      #E3EDE7;
 
     --header-h:  66px;
     --filter-h:  60px;
     --maxw:      1200px;
 
-    --r-lg: 18px;
-    --r-md: 13px;
-    --r-sm: 10px;
+    --r-lg: 16px;
+    --r-md: 12px;
+    --r-sm: 9px;
 
-    --shadow-xs: 0 1px 2px rgba(38,32,18,.05);
-    --shadow-sm: 0 2px 6px rgba(38,32,18,.05), 0 10px 26px rgba(38,32,18,.05);
-    --shadow-md: 0 18px 44px rgba(24,30,20,.13);
+    --shadow-xs: 0 1px 2px rgba(15,35,24,.05);
+    --shadow-sm: 0 1px 3px rgba(15,35,24,.06), 0 4px 12px rgba(15,35,24,.05);
+    --shadow-md: 0 12px 34px rgba(15,35,24,.12);
   }
 
   * { box-sizing: border-box; }
@@ -73,8 +68,8 @@
     top: 0;
     z-index: 200;
     height: var(--header-h);
-    background: rgba(251,250,245,0.86);
-    backdrop-filter: blur(14px);
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--line);
   }
 
@@ -260,9 +255,9 @@
     display: flex;
     align-items: stretch;
     background: var(--panel);
-    border: 1px solid var(--line);
+    border: 1px solid var(--green-200);
     border-radius: var(--r-lg);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-md);
     padding: 7px;
     gap: 6px;
     max-width: 780px;
@@ -328,7 +323,7 @@
     position: sticky;
     top: var(--header-h);
     z-index: 150;
-    background: rgba(246,243,236,0.92);
+    background: rgba(244,248,245,0.95);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--line);
   }
@@ -427,25 +422,26 @@
   .split {
     display: grid;
     grid-template-columns: minmax(330px, 400px) 1fr;
-    gap: 24px;
+    gap: 20px;
     align-items: start;
   }
 
   /* ---- job cards ---- */
-  .job-list { display: flex; flex-direction: column; gap: 14px; }
+  .job-list { display: flex; flex-direction: column; gap: 12px; }
 
   .job-card {
     background: var(--panel);
     border: 1px solid var(--line);
-    border-radius: var(--r-lg);
-    padding: 1.25rem 1.3rem;
-    box-shadow: var(--shadow-xs);
+    border-left: 3px solid transparent;
+    border-radius: var(--r-md);
+    padding: 1.1rem 1.15rem;
     cursor: pointer;
-    transition: box-shadow .18s, border-color .16s, transform .14s;
+    transition: box-shadow .16s, border-color .16s, transform .12s;
   }
-  .job-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); border-color: var(--green-200); }
+  .job-card:hover { box-shadow: var(--shadow-sm); transform: translateY(-1px); }
   .job-card.active {
-    border-color: var(--green-600);
+    border-left-color: var(--green-600);
+    border-color: var(--green-200);
     background: var(--green-50);
     box-shadow: var(--shadow-sm);
   }
@@ -460,7 +456,7 @@
     font-weight: 700;
     font-size: 1.02rem;
     color: var(--green-800);
-    background: linear-gradient(135deg, var(--green-100), var(--panel-2));
+    background: var(--green-100);
     border: 1px solid var(--green-200);
   }
   .jc-head { min-width: 0; flex: 1; }
@@ -512,8 +508,8 @@
     border-radius: 50px;
   }
   .tag.apply { background: var(--green-100); color: var(--green-700); }
-  .tag.new   { background: var(--sand-100); color: var(--gold-600); }
-  .tag.type  { background: #F0EDE4; color: #6B6250; }
+  .tag.new   { background: #FCF3E2; color: #9A6B12; }
+  .tag.type  { background: #EEF2FB; color: #3B5488; }
 
   .jc-posted {
     margin-top: 11px;
@@ -529,7 +525,7 @@
     border: 1px solid var(--line);
     border-radius: var(--r-lg);
     padding: 1.9rem 2rem;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-xs);
     max-height: calc(100vh - var(--header-h) - var(--filter-h) - 34px);
     overflow-y: auto;
   }
