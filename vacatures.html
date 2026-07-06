@@ -5,699 +5,558 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="https://remote-opus.com/wp-content/uploads/2025/01/cropped-DByy2b1.png">
 <title>Vacatures - Remote Opus</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
     --green-900: #0F2318;
     --green-800: #1A4731;
+    --green-700: #235E40;
     --green-600: #2E7D52;
     --green-400: #6B8F7A;
     --green-200: #C8E0D4;
     --green-100: #E8F5EE;
     --green-50:  #F3FAF6;
-    --page-bg:   #F4F7F5;
-    --card-bg:   #FFFFFF;
-    --ink:       #1B2620;
-    --ink-soft:  #566860;
-    --shadow-sm: 0 1px 2px rgba(15, 35, 24, 0.06), 0 1px 3px rgba(15, 35, 24, 0.05);
-    --shadow-md: 0 8px 24px rgba(15, 35, 24, 0.10);
+
+    --body-bg:   #F4F8F5;
+    --panel:     #FFFFFF;
+    --ink:       #17221C;
+    --ink-soft:  #56675E;
+    --line:      #E3EDE7;
+
+    --header-h:  66px;
+    --filter-h:  60px;
+    --maxw:      1200px;
+
+    --r-lg: 16px;
+    --r-md: 12px;
+    --r-sm: 9px;
+
+    --shadow-xs: 0 1px 2px rgba(15,35,24,.05);
+    --shadow-sm: 0 1px 3px rgba(15,35,24,.06), 0 4px 12px rgba(15,35,24,.05);
+    --shadow-md: 0 12px 34px rgba(15,35,24,.12);
   }
 
   * { box-sizing: border-box; }
 
-  html, body {
-    margin: 0;
-    padding: 0;
-  }
+  html, body { margin: 0; padding: 0; }
 
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     color: var(--ink);
-    background: var(--page-bg);
-    padding-top: 68px;
+    background: var(--body-bg);
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
-  a { color: inherit; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; }
 
-  /* ─────────────────────────────  NAV  ───────────────────────────── */
-  nav {
-    position: fixed;
+  .container {
+    width: 100%;
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding-inline: clamp(16px, 4vw, 40px);
+  }
+
+  @media (max-width: 768px) {
+    :root { --header-h: 58px; }
+  }
+
+  /* ==================== HEADER ==================== */
+  .site-header {
+    position: sticky;
     top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    background: rgba(255, 255, 255, 0.96);
+    z-index: 200;
+    height: var(--header-h);
+    background: rgba(255,255,255,0.94);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--green-200);
-    padding: 0 2%;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .header-inner {
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 68px;
+    gap: 1rem;
   }
 
-  .nav-logo {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--green-800);
-    text-decoration: none;
-    letter-spacing: -0.02em;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    align-items: center;
-    margin: 0;
-    padding: 0;
-  }
-
-  .nav-links a {
-    text-decoration: none;
-    color: var(--green-400);
-    font-size: 0.88rem;
-    font-weight: 500;
-    transition: color 0.2s;
-  }
-
-  .nav-links a:hover { color: var(--green-800); }
-
-  .nav-links a.active {
-    color: var(--green-600);
-    font-weight: 600;
-  }
-
-  .nav-links li { position: relative; }
-
-  .nav-links li.has-dropdown::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    height: 14px;
-  }
-
-  .nav-links li .dropdown {
-    display: none;
-    position: absolute;
-    top: calc(100% + 12px);
-    left: 50%;
-    transform: translateX(-50%);
-    background: #FFFFFF;
-    border: 1px solid var(--green-200);
-    border-radius: 12px;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
-    min-width: 200px;
-    padding: 0.5rem 0;
-    z-index: 200;
+  .brand {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
     white-space: nowrap;
   }
 
-  .nav-links li:hover .dropdown,
-  .nav-links li.open .dropdown { display: block; }
-
-  .nav-links li .dropdown a {
-    display: block;
-    padding: 0.65rem 1.2rem;
-    color: var(--green-900);
-    font-size: 0.85rem;
-    font-weight: 500;
-    text-decoration: none;
-    transition: background 0.15s;
-  }
-
-  .nav-links li .dropdown a:hover {
-    background: var(--green-100);
+  .brand-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.42rem;
     color: var(--green-800);
+    letter-spacing: -0.02em;
+    line-height: 1;
   }
 
-  .nav-links li.has-dropdown > a::after {
-    content: ' \25BE';
-    font-size: 0.7rem;
-    opacity: 0.6;
-  }
-
-  .nav-cta {
-    background: var(--green-800);
-    color: #FFFFFF !important;
-    padding: 0.55rem 1.4rem;
+  .brand-sub {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--green-600);
+    padding: 3px 8px;
+    background: var(--green-100);
     border-radius: 50px;
-    text-decoration: none;
-    font-size: 0.875rem;
-    font-weight: 500;
-    transition: all 0.2s;
   }
 
-  .nav-cta:hover {
-    background: var(--green-600);
-    transform: translateY(-1px);
-  }
-
-  .menu-toggle { display: none; }
-
-  .hamburger {
-    display: none;
-    cursor: pointer;
-    padding: 4px;
-    margin-left: auto;
+  .header-nav {
+    display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 0.4rem;
   }
 
-  /* ─────────────────────────────  HERO / SEARCH  ───────────────────────────── */
+  .hnav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--ink-soft);
+    font-size: 0.88rem;
+    font-weight: 500;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--r-sm);
+    transition: color .15s, background .15s;
+  }
+
+  .hnav-link:hover { color: var(--green-800); background: var(--green-50); }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--green-800);
+    padding: 0.55rem 1.1rem;
+    border: 1.5px solid var(--green-200);
+    border-radius: 50px;
+    transition: border-color .15s, background .15s;
+  }
+
+  .btn-outline:hover { border-color: var(--green-600); background: var(--green-50); }
+
+  .btn-solid {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #fff;
+    background: var(--green-800);
+    padding: 0.6rem 1.25rem;
+    border-radius: 50px;
+    transition: background .18s, transform .15s;
+  }
+
+  .btn-solid:hover { background: var(--green-600); transform: translateY(-1px); }
+
+  .header-nav .support-label { display: inline; }
+
+  @media (max-width: 860px) {
+    .hnav-link.employers { display: none; }
+    .btn-solid.header-cta { display: none; }
+  }
+  @media (max-width: 560px) {
+    .header-nav .support-label { display: none; }
+    .brand-sub { display: none; }
+  }
+
+  /* ==================== HERO / USP BANNER ==================== */
   .hero {
-    background: linear-gradient(180deg, var(--green-100) 0%, var(--page-bg) 100%);
-    border-bottom: 1px solid var(--green-200);
-    padding: 2.4rem 5% 1.6rem;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(150deg, var(--green-50) 0%, var(--green-100) 100%);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .hero::before,
+  .hero::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .hero::before {
+    width: 560px; height: 560px;
+    top: -220px; right: -140px;
+    background: radial-gradient(circle, rgba(46,125,82,.16), transparent 70%);
+  }
+  .hero::after {
+    width: 420px; height: 420px;
+    bottom: -240px; left: -120px;
+    background: radial-gradient(circle, rgba(26,71,49,.10), transparent 70%);
   }
 
   .hero-inner {
-    max-width: 1180px;
-    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    padding-block: clamp(2.4rem, 6vw, 4.2rem);
+    max-width: 820px;
   }
 
-  .hero h1 {
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--green-700);
+    background: rgba(255,255,255,0.7);
+    border: 1px solid var(--green-200);
+    padding: 6px 14px;
+    border-radius: 50px;
+    margin-bottom: 1.1rem;
+  }
+  .hero-eyebrow .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--green-600);
+  }
+
+  .hero-title {
     font-family: 'DM Serif Display', serif;
-    font-size: 2.1rem;
-    line-height: 1.15;
-    color: var(--green-800);
-    margin: 0 0 0.4rem;
-    letter-spacing: -0.01em;
+    font-size: clamp(2rem, 5.2vw, 3.35rem);
+    line-height: 1.08;
+    color: var(--green-900);
+    margin: 0 0 1rem;
+    letter-spacing: -0.015em;
   }
+  .hero-title .accent { color: var(--green-600); }
 
-  .hero p {
-    margin: 0 0 1.5rem;
+  .hero-lead {
+    font-size: clamp(1rem, 2vw, 1.18rem);
+    line-height: 1.6;
     color: var(--ink-soft);
-    font-size: 1rem;
+    margin: 0 0 1.9rem;
     max-width: 620px;
   }
 
-  .search-bar {
+  /* search */
+  .search {
     display: flex;
     align-items: stretch;
-    background: var(--card-bg);
+    background: var(--panel);
     border: 1px solid var(--green-200);
-    border-radius: 14px;
+    border-radius: var(--r-lg);
     box-shadow: var(--shadow-md);
-    padding: 6px;
-    gap: 4px;
-    max-width: 900px;
+    padding: 7px;
+    gap: 6px;
+    max-width: 780px;
   }
-
   .search-field {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 11px;
     flex: 1;
-    padding: 0 14px;
+    padding: 0 8px 0 14px;
     position: relative;
   }
-
   .search-field + .search-field::before {
     content: '';
     position: absolute;
-    left: 0;
-    top: 18%;
-    height: 64%;
-    width: 1px;
-    background: var(--green-200);
+    left: 0; top: 20%;
+    height: 60%; width: 1px;
+    background: var(--line);
   }
-
-  .search-field svg {
-    flex-shrink: 0;
-    color: var(--green-600);
-  }
-
+  .search-field .fi { color: var(--green-600); flex-shrink: 0; display: flex; }
   .search-field input {
-    border: none;
-    outline: none;
+    border: none; outline: none;
     font-family: inherit;
-    font-size: 0.98rem;
+    font-size: 1rem;
     color: var(--ink);
     width: 100%;
     padding: 15px 0;
     background: transparent;
   }
-
-  .search-field input::placeholder { color: #98a89f; }
+  .search-field input::placeholder { color: #93a69b; }
 
   .search-btn {
     background: var(--green-800);
     color: #fff;
     border: none;
-    border-radius: 10px;
-    font-family: inherit;
-    font-size: 0.95rem;
+    border-radius: var(--r-md);
+    font-size: 0.98rem;
     font-weight: 600;
-    padding: 0 26px;
+    padding: 0 28px;
     cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
+    transition: background .18s, transform .15s;
     white-space: nowrap;
   }
+  .search-btn:hover { background: var(--green-600); transform: translateY(-1px); }
 
-  .search-btn:hover {
-    background: var(--green-600);
-    transform: translateY(-1px);
+  .hero-trust {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 20px;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+  }
+  .hero-trust .ti { display: inline-flex; align-items: center; gap: 8px; }
+  .hero-trust .ti svg { color: var(--green-600); }
+  .hero-trust strong { color: var(--green-800); font-weight: 700; }
+
+  /* ==================== USP CARDS ==================== */
+  .usp {
+    background: var(--panel);
+    border-bottom: 1px solid var(--line);
+  }
+  .usp-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    padding-block: clamp(1.8rem, 4vw, 2.6rem);
+  }
+  .usp-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .usp-ic {
+    width: 48px; height: 48px;
+    border-radius: var(--r-md);
+    background: var(--green-100);
+    color: var(--green-600);
+    display: grid;
+    place-items: center;
+    margin-bottom: 2px;
+  }
+  .usp-card h3 {
+    margin: 0;
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--green-800);
+  }
+  .usp-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
   }
 
-  /* ─────────────────────────────  FILTER BAR  ───────────────────────────── */
+  @media (max-width: 900px) { .usp-grid { grid-template-columns: repeat(2, 1fr); gap: 22px; } }
+  @media (max-width: 520px) { .usp-grid { grid-template-columns: 1fr; gap: 20px; } }
+
+  /* ==================== FILTER BAR ==================== */
   .filter-bar {
     position: sticky;
-    top: 68px;
-    z-index: 60;
-    background: rgba(244, 247, 245, 0.94);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--green-200);
-    padding: 0.7rem 5%;
+    top: var(--header-h);
+    z-index: 150;
+    background: rgba(244,248,245,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
   }
-
   .filter-inner {
-    max-width: 1180px;
-    margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     align-items: center;
+    padding-block: 0.72rem;
   }
-
   .filter-dropdown { position: relative; }
 
-  .filter-btn {
+  .filter-btn, .filter-pill {
     display: inline-flex;
     align-items: center;
-    gap: 7px;
-    background: var(--card-bg);
+    gap: 8px;
+    background: var(--panel);
     border: 1px solid var(--green-200);
     color: var(--green-800);
-    font-family: inherit;
-    font-size: 0.85rem;
+    font-size: 0.86rem;
     font-weight: 500;
-    padding: 0.5rem 0.9rem;
+    padding: 0.52rem 0.95rem;
     border-radius: 50px;
     cursor: pointer;
-    transition: border-color 0.15s, background 0.15s;
+    transition: border-color .15s, background .15s, color .15s;
     white-space: nowrap;
   }
-
-  .filter-btn:hover { border-color: var(--green-600); }
-
+  .filter-btn:hover, .filter-pill:hover { border-color: var(--green-600); }
   .filter-btn::after {
-    content: '\25BE';
-    font-size: 0.65rem;
-    opacity: 0.6;
+    content: '';
+    width: 8px; height: 8px;
+    border-right: 1.6px solid currentColor;
+    border-bottom: 1.6px solid currentColor;
+    transform: rotate(45deg) translate(-1px,-1px);
+    opacity: .5;
+    margin-left: 2px;
   }
-
-  .filter-btn.selected,
-  .filter-pill.active {
+  .filter-btn.selected, .filter-pill.active {
     background: var(--green-800);
     color: #fff;
     border-color: var(--green-800);
   }
-
-  .filter-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    background: var(--card-bg);
-    border: 1px solid var(--green-200);
-    color: var(--green-800);
-    font-family: inherit;
-    font-size: 0.85rem;
-    font-weight: 500;
-    padding: 0.5rem 0.9rem;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: border-color 0.15s, background 0.15s;
-  }
-
-  .filter-pill:hover { border-color: var(--green-600); }
-
   .filter-menu {
     display: none;
     position: absolute;
     top: calc(100% + 8px);
     left: 0;
-    background: var(--card-bg);
+    background: var(--panel);
     border: 1px solid var(--green-200);
-    border-radius: 12px;
+    border-radius: var(--r-md);
     box-shadow: var(--shadow-md);
-    min-width: 210px;
-    padding: 0.4rem;
-    z-index: 120;
+    min-width: 216px;
+    padding: 6px;
+    z-index: 160;
   }
-
   .filter-dropdown.open .filter-menu { display: block; }
-
   .filter-option {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.6rem 0.75rem;
-    border-radius: 8px;
+    padding: 0.58rem 0.7rem;
+    border-radius: var(--r-sm);
     font-size: 0.87rem;
     color: var(--ink);
     cursor: pointer;
-    transition: background 0.12s;
+    transition: background .12s;
   }
-
   .filter-option:hover { background: var(--green-50); }
+  .filter-option.chosen { color: var(--green-600); font-weight: 600; }
+  .filter-option.chosen::after { content: '\2713'; font-weight: 700; }
 
-  .filter-option.chosen {
-    color: var(--green-600);
-    font-weight: 600;
+  .filter-spacer { flex: 1 1 auto; }
+  .sort-wrap { display: inline-flex; align-items: center; gap: 8px; }
+  .sort-label { font-size: 0.82rem; color: var(--ink-soft); }
+
+  @media (max-width: 680px) {
+    .filter-spacer { display: none; }
+    .sort-wrap .sort-label { display: none; }
   }
 
-  .filter-option.chosen::after {
-    content: '\2713';
-    color: var(--green-600);
-    font-weight: 700;
-  }
-
-  .filter-spacer { flex: 1; }
-
-  .sort-label {
-    font-size: 0.82rem;
-    color: var(--ink-soft);
-    margin-right: -2px;
-  }
-
-  /* ─────────────────────────────  LAYOUT  ───────────────────────────── */
-  .board {
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: 1.4rem 5% 4rem;
-  }
+  /* ==================== BOARD ==================== */
+  .board { padding-block: 1.6rem 3rem; }
 
   .results-head {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
-    margin-bottom: 1rem;
     gap: 1rem;
     flex-wrap: wrap;
+    margin-bottom: 1.1rem;
   }
-
-  .results-count {
-    font-size: 0.95rem;
-    color: var(--ink-soft);
-  }
-
+  .results-count { font-size: 0.98rem; color: var(--ink-soft); }
   .results-count strong { color: var(--green-800); }
-
   .results-query { color: var(--green-600); font-weight: 600; }
 
   .split {
     display: grid;
-    grid-template-columns: minmax(340px, 420px) 1fr;
-    gap: 1.2rem;
+    grid-template-columns: minmax(330px, 400px) 1fr;
+    gap: 20px;
     align-items: start;
   }
 
-  /* ─────────────────────────────  JOB CARDS  ───────────────────────────── */
-  .job-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
+  /* ---- job cards ---- */
+  .job-list { display: flex; flex-direction: column; gap: 12px; }
 
   .job-card {
-    background: var(--card-bg);
-    border: 1px solid var(--green-200);
-    border-left: 4px solid transparent;
-    border-radius: 12px;
-    padding: 1.05rem 1.1rem;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-left: 3px solid transparent;
+    border-radius: var(--r-md);
+    padding: 1.1rem 1.15rem;
     cursor: pointer;
-    transition: box-shadow 0.15s, border-color 0.15s, transform 0.12s;
+    transition: box-shadow .16s, border-color .16s, transform .12s;
   }
-
-  .job-card:hover {
-    box-shadow: var(--shadow-md);
-    transform: translateY(-1px);
-  }
-
+  .job-card:hover { box-shadow: var(--shadow-sm); transform: translateY(-1px); }
   .job-card.active {
     border-left-color: var(--green-600);
+    border-color: var(--green-200);
     background: var(--green-50);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-sm);
   }
 
-  .job-card h3 {
-    margin: 0 0 4px;
+  .jc-top { display: flex; align-items: flex-start; gap: 12px; }
+  .avatar {
+    width: 44px; height: 44px;
+    flex-shrink: 0;
+    border-radius: 11px;
+    display: grid;
+    place-items: center;
+    font-weight: 700;
     font-size: 1.02rem;
-    font-weight: 600;
     color: var(--green-800);
-    line-height: 1.3;
+    background: var(--green-100);
+    border: 1px solid var(--green-200);
   }
-
-  .job-company {
-    font-size: 0.87rem;
-    color: var(--ink-soft);
+  .jc-head { min-width: 0; flex: 1; }
+  .job-card h3 {
+    margin: 0 0 3px;
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--green-800);
+    line-height: 1.32;
+  }
+  .jc-company {
     display: flex;
     align-items: center;
     gap: 8px;
     flex-wrap: wrap;
+    font-size: 0.86rem;
+    color: var(--ink-soft);
   }
-
-  .job-rating {
+  .rating {
     display: inline-flex;
     align-items: center;
     gap: 3px;
-    color: var(--green-600);
+    color: var(--green-700);
     font-weight: 600;
   }
+  .rating svg { color: #E8B84B; }
 
-  .job-rating svg { color: #E8B84B; }
-
-  .job-meta {
-    margin-top: 8px;
-    font-size: 0.85rem;
-    color: var(--ink);
+  .jc-meta {
+    margin-top: 12px;
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 5px;
   }
-
-  .job-meta .row {
+  .meta-row {
     display: flex;
     align-items: center;
-    gap: 7px;
+    gap: 9px;
+    font-size: 0.86rem;
     color: var(--ink-soft);
   }
+  .meta-row svg { color: var(--green-600); flex-shrink: 0; }
+  .meta-row.salary { color: var(--green-800); font-weight: 600; }
 
-  .job-meta .salary {
-    color: var(--green-800);
-    font-weight: 600;
-  }
-
-  .job-tags {
-    margin-top: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-
+  .jc-tags { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; }
   .tag {
     font-size: 0.73rem;
     font-weight: 600;
-    padding: 3px 9px;
+    padding: 4px 10px;
     border-radius: 50px;
-    letter-spacing: 0.01em;
   }
+  .tag.apply { background: var(--green-100); color: var(--green-700); }
+  .tag.new   { background: #FCF3E2; color: #9A6B12; }
+  .tag.type  { background: #EEF2FB; color: #3B5488; }
 
-  .tag.apply {
-    background: var(--green-100);
-    color: var(--green-800);
-  }
-
-  .tag.new {
-    background: #FCF3E2;
-    color: #9A6B12;
-  }
-
-  .tag.type {
-    background: #EEF2FB;
-    color: #3B5488;
-  }
-
-  .job-posted {
-    margin-top: 9px;
+  .jc-posted {
+    margin-top: 11px;
     font-size: 0.78rem;
-    color: #8a998f;
+    color: #8b9a90;
   }
 
-  /* ─────────────────────────────  DETAIL PANE  ───────────────────────────── */
+  /* ---- detail ---- */
   .detail {
     position: sticky;
-    top: 132px;
-    background: var(--card-bg);
-    border: 1px solid var(--green-200);
-    border-radius: 14px;
-    padding: 1.8rem 1.9rem;
-    box-shadow: var(--shadow-sm);
-    max-height: calc(100vh - 152px);
+    top: calc(var(--header-h) + var(--filter-h) + 16px);
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 1.9rem 2rem;
+    box-shadow: var(--shadow-xs);
+    max-height: calc(100vh - var(--header-h) - var(--filter-h) - 34px);
     overflow-y: auto;
   }
 
-  .detail-head h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.7rem;
-    color: var(--green-800);
-    margin: 0 0 6px;
-    line-height: 1.2;
-  }
-
-  .detail-company {
-    font-size: 0.95rem;
-    color: var(--ink);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 4px;
-  }
-
-  .detail-company .name { font-weight: 600; }
-
-  .detail-sub {
-    color: var(--ink-soft);
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    margin-bottom: 14px;
-  }
-
-  .detail-facts {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 18px;
-  }
-
-  .fact {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--green-50);
-    border: 1px solid var(--green-200);
-    border-radius: 10px;
-    padding: 8px 12px;
-    font-size: 0.85rem;
-  }
-
-  .fact svg { color: var(--green-600); flex-shrink: 0; }
-  .fact strong { color: var(--green-800); font-weight: 600; }
-  .fact span { display: block; color: var(--ink-soft); font-size: 0.75rem; }
-
-  .detail-actions {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin-bottom: 22px;
-    padding-bottom: 22px;
-    border-bottom: 1px solid var(--green-200);
-  }
-
-  .apply-btn {
-    background: var(--green-800);
-    color: #fff;
-    border: none;
-    border-radius: 50px;
-    font-family: inherit;
-    font-size: 0.95rem;
-    font-weight: 600;
-    padding: 0.8rem 1.8rem;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-  }
-
-  .apply-btn:hover {
-    background: var(--green-600);
-    transform: translateY(-1px);
-  }
-
-  .save-btn {
-    background: var(--card-bg);
-    border: 1px solid var(--green-200);
-    color: var(--green-800);
-    border-radius: 50px;
-    width: 46px;
-    height: 46px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: border-color 0.15s, background 0.15s;
-  }
-
-  .save-btn:hover { border-color: var(--green-600); background: var(--green-50); }
-  .save-btn.saved { background: var(--green-800); color: #fff; border-color: var(--green-800); }
-
-  .detail-body h4 {
-    font-size: 1.02rem;
-    color: var(--green-800);
-    margin: 22px 0 10px;
-  }
-
-  .detail-body p {
-    font-size: 0.92rem;
-    line-height: 1.65;
-    color: var(--ink);
-    margin: 0 0 12px;
-  }
-
-  .detail-body ul {
-    margin: 0 0 12px;
-    padding-left: 0;
-    list-style: none;
-  }
-
-  .detail-body li {
-    position: relative;
-    padding-left: 26px;
-    font-size: 0.92rem;
-    line-height: 1.6;
-    color: var(--ink);
-    margin-bottom: 8px;
-  }
-
-  .detail-body li::before {
-    content: '';
-    position: absolute;
-    left: 4px;
-    top: 9px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--green-600);
-  }
-
-  .detail-foot {
-    margin-top: 22px;
-    padding-top: 18px;
-    border-top: 1px solid var(--green-200);
-    font-size: 0.82rem;
-    color: var(--ink-soft);
-  }
-
-  .detail-empty {
-    text-align: center;
-    color: var(--ink-soft);
-    padding: 3rem 1rem;
-  }
-
-  /* mobile back button inside detail overlay */
   .detail-back {
     display: none;
     align-items: center;
@@ -705,146 +564,246 @@
     background: none;
     border: none;
     color: var(--green-600);
-    font-family: inherit;
     font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
-    padding: 0 0 14px;
+    padding: 0 0 16px;
   }
 
-  /* ─────────────────────────────  RESPONSIVE  ───────────────────────────── */
+  .detail-head { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 4px; }
+  .detail-head .avatar { width: 54px; height: 54px; font-size: 1.25rem; border-radius: 13px; }
+  .detail-head h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.4rem, 3vw, 1.75rem);
+    color: var(--green-900);
+    margin: 2px 0 6px;
+    line-height: 1.18;
+  }
+  .detail-company { font-size: 0.95rem; color: var(--ink); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .detail-company .name { font-weight: 600; }
+
+  .detail-facts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .fact {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    background: var(--green-50);
+    border: 1px solid var(--green-200);
+    border-radius: var(--r-md);
+    padding: 11px 12px;
+  }
+  .fact-ic {
+    width: 38px; height: 38px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #fff;
+    border: 1px solid var(--green-200);
+    color: var(--green-600);
+    display: grid;
+    place-items: center;
+  }
+  .fact-tx strong { display: block; color: var(--green-800); font-weight: 700; font-size: 0.9rem; line-height: 1.2; }
+  .fact-tx span { display: block; color: var(--ink-soft); font-size: 0.75rem; margin-top: 2px; }
+
+  .detail-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 22px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--line);
+  }
+  .apply-btn {
+    background: var(--green-800);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-size: 0.96rem;
+    font-weight: 600;
+    padding: 0.82rem 1.9rem;
+    cursor: pointer;
+    transition: background .18s, transform .15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+  }
+  .apply-btn:hover { background: var(--green-600); transform: translateY(-1px); }
+  .save-btn {
+    background: var(--panel);
+    border: 1.5px solid var(--green-200);
+    color: var(--green-800);
+    border-radius: 50px;
+    width: 48px; height: 48px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color .15s, background .15s, color .15s;
+  }
+  .save-btn:hover { border-color: var(--green-600); background: var(--green-50); }
+  .save-btn.saved { background: var(--green-800); color: #fff; border-color: var(--green-800); }
+
+  .detail-body h4 { font-size: 1.02rem; color: var(--green-800); margin: 22px 0 11px; }
+  .detail-body p { font-size: 0.94rem; line-height: 1.68; color: var(--ink); margin: 0 0 12px; }
+  .detail-body ul { margin: 0 0 14px; padding: 0; list-style: none; }
+  .detail-body li {
+    position: relative;
+    padding-left: 26px;
+    font-size: 0.94rem;
+    line-height: 1.62;
+    color: var(--ink);
+    margin-bottom: 9px;
+  }
+  .detail-body li::before {
+    content: '';
+    position: absolute;
+    left: 3px; top: 8px;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--green-600);
+  }
+  .detail-foot {
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+  }
+  .detail-empty { text-align: center; color: var(--ink-soft); padding: 3rem 1rem; }
+
+  /* ==================== FOOTER ==================== */
+  .site-footer {
+    background: var(--green-900);
+    color: #cfe0d6;
+    padding-block: 2.4rem;
+    margin-top: 1rem;
+  }
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+  }
+  .footer-brand { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: #fff; }
+  .footer-links { display: flex; gap: 1.4rem; flex-wrap: wrap; }
+  .footer-links a { font-size: 0.88rem; color: #b6cdc0; transition: color .15s; }
+  .footer-links a:hover { color: #fff; }
+  .footer-copy { width: 100%; font-size: 0.8rem; color: #7f9a8a; margin-top: 0.6rem; }
+
+  /* ==================== RESPONSIVE BOARD ==================== */
   @media (max-width: 900px) {
     .split { grid-template-columns: 1fr; }
-
     .detail {
       display: none;
       position: fixed;
-      inset: 68px 0 0 0;
+      inset: var(--header-h) 0 0 0;
       max-height: none;
       border-radius: 0;
       border: none;
-      z-index: 90;
+      z-index: 180;
       overflow-y: auto;
-      padding: 1.3rem 1.4rem 3rem;
+      padding: 1.3rem clamp(16px,5vw,24px) 3rem;
     }
-
     .detail.open { display: block; }
     .detail-back { display: inline-flex; }
   }
 
-  @media (max-width: 768px) {
-    nav {
-      height: 68px !important;
-      padding: 0 6% !important;
-      justify-content: space-between !important;
-    }
-    .nav-cta { display: none !important; }
-    .hamburger { display: flex !important; }
-    .nav-links {
-      display: none !important;
-      flex-direction: column;
-      position: fixed;
-      top: 68px;
-      left: 0;
-      right: 0;
-      transform: none;
-      background: rgba(255, 255, 255, 0.98);
-      padding: 2rem 6%;
-      border-bottom: 1px solid var(--green-200);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-      gap: 1.5rem;
-      text-align: center;
-      z-index: 9998;
-    }
-    .menu-toggle:checked ~ .nav-links { display: flex !important; }
-    .nav-links li .dropdown {
-      position: static !important;
-      transform: none !important;
-      box-shadow: none !important;
-      border: none !important;
-      background: transparent !important;
-      padding: 0 !important;
-      display: none !important;
-    }
-    .nav-links li.has-dropdown.open .dropdown { display: block !important; }
-    .nav-links li.has-dropdown::after { display: none !important; }
-  }
-
   @media (max-width: 620px) {
-    .hero h1 { font-size: 1.6rem; }
-    .search-bar { flex-direction: column; }
+    .search { flex-direction: column; }
     .search-field + .search-field::before { display: none; }
-    .search-field {
-      border-top: 1px solid var(--green-200);
-      border-radius: 0;
-    }
+    .search-field { border-top: 1px solid var(--line); padding: 0 14px; }
     .search-field:first-child { border-top: none; }
-    .search-btn { padding: 14px; border-radius: 10px; }
-  }
-
-  @media (max-width: 480px) {
-    .nav-logo { font-size: 1.2rem; }
+    .search-btn { padding: 15px; border-radius: var(--r-md); margin-top: 2px; }
+    .detail-facts { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
-<!-- ─────────────────────────  NAV (Remote Opus header)  ───────────────────────── -->
-<nav>
-  <a class="nav-logo" href="https://remote-opus.com/home-page/">Remote Opus</a>
-  <input type="checkbox" id="mobile-menu-toggle" class="menu-toggle">
-  <label for="mobile-menu-toggle" class="hamburger">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1A4731" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="3" y1="6" x2="21" y2="6"></line>
-      <line x1="3" y1="12" x2="21" y2="12"></line>
-      <line x1="3" y1="18" x2="21" y2="18"></line>
-    </svg>
-  </label>
-  <ul class="nav-links">
-    <li class="has-dropdown">
-      <a href="#">Voor wie</a>
-      <div class="dropdown">
-        <a href="https://remote-opus.com/e-commerce-page/">E-commerce bedrijven</a>
-        <a href="https://remote-opus.com/agencies/">Agencies &amp; Bureaus</a>
-      </div>
-    </li>
-    <li><a href="https://remote-opus.com/tarieven-page/">Tarieven</a></li>
-    <li><a href="https://remote-opus.com/succes/">Succes verhalen</a></li>
-    <li><a href="https://remote-opus.com/office/">Onze kantoren</a></li>
-    <li><a href="https://remote-opus.com/over-ons-2/">Over ons</a></li>
-    <li><a href="https://remote-opus.com/contact-page/">Contact</a></li>
-  </ul>
-  <a href="https://remote-opus.com/kennismaking/" class="nav-cta">Plan een gesprek</a>
-</nav>
+<!-- ==================== HEADER ==================== -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="https://remote-opus.com/home-page/">
+      <span class="brand-name">Remote Opus</span>
+      <span class="brand-sub">Vacatures</span>
+    </a>
+    <nav class="header-nav">
+      <a class="hnav-link employers" href="https://remote-opus.com/e-commerce-page/">Voor werkgevers</a>
+      <a class="hnav-link" href="https://remote-opus.com/contact-page/">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+        <span class="support-label">Support</span>
+      </a>
+      <a class="btn-outline" href="#">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        Inloggen
+      </a>
+      <a class="btn-solid header-cta" href="https://remote-opus.com/kennismaking/">Plaats een vacature</a>
+    </nav>
+  </div>
+</header>
 
-<!-- ─────────────────────────  HERO + SEARCH  ───────────────────────── -->
-<header class="hero">
-  <div class="hero-inner">
-    <h1>Vind jouw volgende remote baan</h1>
-    <p>Bekijk actuele vacatures bij ambitieuze e-commerce bedrijven en agencies. Volledig remote, met een team dat achter je staat.</p>
-    <form class="search-bar" id="searchForm" autocomplete="off">
+<!-- ==================== HERO / USP BANNER ==================== -->
+<section class="hero">
+  <div class="container hero-inner">
+    <span class="hero-eyebrow"><span class="dot"></span>Remote werk bij groeiende e-commerce merken</span>
+    <h1 class="hero-title">Vind jouw volgende <span class="accent">remote baan</span></h1>
+    <p class="hero-lead">Solliciteer bij zorgvuldig geselecteerde e-commerce bedrijven en agencies. Volledig op afstand, eerlijk betaald en met een team dat achter je staat.</p>
+
+    <form class="search" id="searchForm" autocomplete="off">
       <div class="search-field">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
+        <span class="fi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
         <input type="text" id="whatInput" placeholder="Functie, trefwoord of bedrijf">
       </div>
       <div class="search-field">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-          <circle cx="12" cy="10" r="3"></circle>
-        </svg>
+        <span class="fi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
         <input type="text" id="whereInput" placeholder="Locatie of remote">
       </div>
       <button type="submit" class="search-btn">Zoek vacatures</button>
     </form>
-  </div>
-</header>
 
-<!-- ─────────────────────────  FILTER BAR  ───────────────────────── -->
+    <div class="hero-trust">
+      <span class="ti"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg><strong id="heroCount">0</strong>&nbsp;open vacatures</span>
+      <span class="ti"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>100% remote</span>
+      <span class="ti"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Direct solliciteren</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== USP CARDS ==================== -->
+<section class="usp">
+  <div class="container usp-grid">
+    <div class="usp-card">
+      <div class="usp-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg></div>
+      <h3>100% remote</h3>
+      <p>Werk vanuit huis of waar je ook bent, met flexibele werktijden.</p>
+    </div>
+    <div class="usp-card">
+      <div class="usp-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.4-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.4 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></div>
+      <h3>Betrouwbare werkgevers</h3>
+      <p>Alleen zorgvuldig geselecteerde merken en agencies met een goede reputatie.</p>
+    </div>
+    <div class="usp-card">
+      <div class="usp-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h13"/><path d="M4 14h9"/><path d="M18.5 5.5A7.5 7.5 0 0 0 13 3a8 8 0 0 0 0 16 7.5 7.5 0 0 0 5.5-2.5"/></svg></div>
+      <h3>Eerlijk salaris</h3>
+      <p>Marktconforme beloning, transparant vermeld bij elke vacature.</p>
+    </div>
+    <div class="usp-card">
+      <div class="usp-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <h3>Persoonlijke begeleiding</h3>
+      <p>Een vast aanspreekpunt dat je begeleidt van sollicitatie tot start.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FILTER BAR ==================== -->
 <div class="filter-bar">
-  <div class="filter-inner">
+  <div class="container filter-inner">
     <div class="filter-dropdown" data-filter="type">
       <button class="filter-btn" type="button">Dienstverband</button>
       <div class="filter-menu">
@@ -876,29 +835,26 @@
     </div>
 
     <button class="filter-pill" type="button" id="remoteToggle">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-        <polyline points="9 22 9 12 15 12 15 22"></polyline>
-      </svg>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
       Thuiswerken
     </button>
 
     <div class="filter-spacer"></div>
 
-    <div class="filter-dropdown" data-filter="sort">
+    <div class="filter-dropdown sort-wrap" data-filter="sort">
       <span class="sort-label">Sorteer op:</span>
-      <button class="filter-btn" type="button" style="margin-left:8px;">Relevantie</button>
+      <button class="filter-btn" type="button">Relevantie</button>
       <div class="filter-menu" style="right:0;left:auto;">
         <div class="filter-option chosen" data-value="relevance">Relevantie</div>
-        <div class="filter-option" data-value="date">Datum</div>
+        <div class="filter-option" data-value="date">Nieuwste eerst</div>
         <div class="filter-option" data-value="salary">Hoogste salaris</div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ─────────────────────────  BOARD  ───────────────────────── -->
-<main class="board">
+<!-- ==================== BOARD ==================== -->
+<main class="container board">
   <div class="results-head">
     <div class="results-count" id="resultsCount"></div>
   </div>
@@ -908,425 +864,135 @@
   </div>
 </main>
 
+<!-- ==================== FOOTER ==================== -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">Remote Opus</div>
+    <nav class="footer-links">
+      <a href="https://remote-opus.com/e-commerce-page/">E-commerce bedrijven</a>
+      <a href="https://remote-opus.com/agencies/">Agencies en Bureaus</a>
+      <a href="https://remote-opus.com/tarieven-page/">Tarieven</a>
+      <a href="https://remote-opus.com/over-ons-2/">Over ons</a>
+      <a href="https://remote-opus.com/contact-page/">Contact</a>
+    </nav>
+    <div class="footer-copy">Remote Opus. Remote talent voor e-commerce bedrijven en agencies.</div>
+  </div>
+</footer>
+
 <script>
-  /* ─────────────  JOB DATA  ───────────── */
+  /* ==================== JOB DATA ==================== */
   const jobs = [
-    {
-      id: 1,
-      title: "Senior E-commerce Manager",
-      company: "Remote Opus",
-      rating: 4.8,
-      location: "Remote (EU tijdzone)",
-      remote: true,
-      salaryMin: 3200, salaryMax: 4100,
-      type: "Fulltime",
-      posted: 0,
-      apply: true,
-      intro: "Jij stuurt de complete online groei aan van een snelgroeiend e-commerce merk. Van strategie tot uitvoering, met een remote team dat op jou rekent.",
-      doen: [
-        "De e-commerce strategie vertalen naar concrete kwartaaldoelen",
-        "Aansturen van een klein team van marketeers en specialisten",
-        "Optimaliseren van conversie, gemiddelde orderwaarde en retentie",
-        "Rapporteren over omzet, marge en groei aan het management"
-      ],
-      vragen: [
-        "Minimaal 4 jaar ervaring in een e-commerce of online marketing rol",
-        "Sterk in data, analyse en het nemen van onderbouwde beslissingen",
-        "Uitstekende beheersing van Nederlands en Engels",
-        "Zelfstandig, gestructureerd en comfortabel met remote werken"
-      ],
-      bieden: [
-        "Een marktconform salaris tussen 3.200 en 4.100 euro per maand",
-        "Volledig remote met flexibele werktijden",
-        "Een jaarlijks opleidingsbudget van 1.500 euro",
-        "Twee teamweken per jaar op locatie"
-      ]
-    },
-    {
-      id: 2,
-      title: "Virtual Assistant",
-      company: "Bloom Studio",
-      rating: 4.6,
-      location: "Thuiswerken",
-      remote: true,
-      salaryMin: 1800, salaryMax: 2400,
-      type: "Fulltime",
-      posted: 1,
-      apply: true,
-      intro: "Als Virtual Assistant word je de rechterhand van de oprichter. Je houdt de dagelijkse operatie soepel en zorgt dat niets blijft liggen.",
-      doen: [
-        "Beheren van de agenda, inbox en afspraken",
-        "Voorbereiden van documenten, presentaties en rapportages",
-        "Coordineren van kleine projecten en opvolgen van deadlines",
-        "Contact met leveranciers en klanten waar nodig"
-      ],
-      vragen: [
-        "Ervaring als assistent, office manager of vergelijkbaar",
-        "Zeer georganiseerd en proactief van instelling",
-        "Vloeiend in Nederlands, goede kennis van Engels",
-        "Bekend met tools als Google Workspace, Notion en Slack"
-      ],
-      bieden: [
-        "Salaris tussen 1.800 en 2.400 euro per maand",
-        "Een warme, informele werksfeer",
-        "Volledige vrijheid om je dag zelf in te delen",
-        "Ruimte om door te groeien naar operations"
-      ]
-    },
-    {
-      id: 3,
-      title: "Klantenservice Medewerker (NL)",
-      company: "Kavro E-commerce",
-      rating: 4.4,
-      location: "Remote",
-      remote: true,
-      salaryMin: 2000, salaryMax: 2600,
-      type: "Fulltime",
-      posted: 2,
-      apply: true,
-      intro: "Jij bent de stem van het merk richting duizenden klanten. Vriendelijk, snel en oplossingsgericht, elke dag opnieuw.",
-      doen: [
-        "Beantwoorden van vragen via e-mail, chat en telefoon",
-        "Oplossen van bestellingen, retouren en klachten",
-        "Signaleren van terugkerende problemen aan het team",
-        "Bewaken van een hoge klanttevredenheid"
-      ],
-      vragen: [
-        "Ervaring in klantenservice is een sterke plus",
-        "Uitstekende schriftelijke en mondelinge uitdrukkingsvaardigheid",
-        "Geduldig, empathisch en stressbestendig",
-        "Betrouwbare internetverbinding en een rustige werkplek"
-      ],
-      bieden: [
-        "Salaris tussen 2.000 en 2.600 euro per maand",
-        "Duidelijke inwerkperiode en doorlopende training",
-        "Werken in roosters die passen bij jouw leven",
-        "Een hecht remote team met dagelijkse check-ins"
-      ]
-    },
-    {
-      id: 4,
-      title: "Social Media Manager",
-      company: "Northbrand Agency",
-      rating: 4.7,
-      location: "Remote",
-      remote: true,
-      salaryMin: 2400, salaryMax: 3100,
-      type: "Fulltime",
-      posted: 2,
-      apply: false,
-      intro: "Jij bedenkt en beheert de social kanalen van meerdere merken. Van contentkalender tot community, jij houdt het levendig.",
-      doen: [
-        "Opstellen van maandelijkse contentkalenders per merk",
-        "Creeren van posts, reels en stories in de juiste tone of voice",
-        "Beheren van de community en reageren op berichten",
-        "Analyseren van resultaten en bijsturen waar nodig"
-      ],
-      vragen: [
-        "Aantoonbare ervaring met social media voor merken",
-        "Gevoel voor beeld, tekst en trends",
-        "Handig met tools als Meta Business Suite en Canva",
-        "Zelfstandig en creatief, met oog voor planning"
-      ],
-      bieden: [
-        "Salaris tussen 2.400 en 3.100 euro per maand",
-        "Werken met uiteenlopende, inspirerende merken",
-        "Volledig remote met veel creatieve vrijheid",
-        "Een team van specialisten om van te leren"
-      ]
-    },
-    {
-      id: 5,
-      title: "Google Ads Specialist (SEA)",
-      company: "Remote Opus",
-      rating: 4.8,
-      location: "Remote (EU tijdzone)",
-      remote: true,
-      salaryMin: 2800, salaryMax: 3600,
-      type: "Fulltime",
-      posted: 3,
-      apply: true,
-      intro: "Jij haalt het maximale uit advertentiebudgetten. Met scherpe campagnes en constante optimalisatie laat je de omzet groeien.",
-      doen: [
-        "Opzetten en beheren van Google Ads en Shopping campagnes",
-        "Dagelijks optimaliseren op basis van data en doelen",
-        "A/B testen van advertenties, biedingen en doelgroepen",
-        "Rapporteren over rendement en advieswerk richting klanten"
-      ],
-      vragen: [
-        "Minimaal 2 jaar ervaring met Google Ads en SEA",
-        "Sterk analytisch en cijfermatig ingesteld",
-        "Ervaring met Google Analytics en tag management",
-        "Resultaatgericht en altijd op zoek naar verbetering"
-      ],
-      bieden: [
-        "Salaris tussen 2.800 en 3.600 euro per maand",
-        "Certificeringen en trainingen volledig vergoed",
-        "Werken met serieuze mediabudgetten",
-        "Volledig remote met flexibele uren"
-      ]
-    },
-    {
-      id: 6,
-      title: "Grafisch Ontwerper",
-      company: "Studio Vonk",
-      rating: 4.5,
-      location: "Remote",
-      remote: true,
-      salaryMin: 2200, salaryMax: 2900,
-      type: "Freelance",
-      posted: 4,
-      apply: false,
-      intro: "Jij vertaalt merken naar sterk visueel werk. Van social visuals tot complete campagnes, alles met een herkenbare stijl.",
-      doen: [
-        "Ontwerpen voor social, web, e-mail en advertenties",
-        "Bewaken van de huisstijl over alle uitingen heen",
-        "Samenwerken met marketeers en copywriters",
-        "Aanleveren van nette, productieklare bestanden"
-      ],
-      vragen: [
-        "Sterk portfolio met commercieel ontwerpwerk",
-        "Vaardig in de Adobe Creative Cloud en Figma",
-        "Oog voor detail, typografie en compositie",
-        "Zelfstandig werkend en goed in plannen"
-      ],
-      bieden: [
-        "Een uurtarief passend bij 2.200 tot 2.900 euro per maand",
-        "Langdurige samenwerking met vaste opdrachten",
-        "Veel creatieve vrijheid en vertrouwen",
-        "Directe lijnen, weinig bureaucratie"
-      ]
-    },
-    {
-      id: 7,
-      title: "Boekhouder / Financieel Assistent",
-      company: "Ledger en Co",
-      rating: 4.3,
-      location: "Remote",
-      remote: true,
-      salaryMin: 2500, salaryMax: 3200,
-      type: "Parttime",
-      posted: 5,
-      apply: true,
-      intro: "Jij houdt de administratie strak en overzichtelijk. Betrouwbaar, nauwkeurig en altijd op tijd met de cijfers.",
-      doen: [
-        "Verwerken van inkoop- en verkoopfacturen",
-        "Voorbereiden van btw-aangiftes en maandafsluitingen",
-        "Bewaken van debiteuren en crediteuren",
-        "Ondersteunen bij rapportages en jaarafsluiting"
-      ],
-      vragen: [
-        "Ervaring met boekhouding of financiele administratie",
-        "Nauwkeurig, discreet en goed georganiseerd",
-        "Bekend met boekhoudsoftware zoals Exact of Moneybird",
-        "Goede beheersing van het Nederlands"
-      ],
-      bieden: [
-        "Salaris op fulltime basis tussen 2.500 en 3.200 euro",
-        "Parttime invulling van 24 tot 32 uur per week",
-        "Volledig remote met rustige, geregelde werkdagen",
-        "Een stabiele, langdurige rol"
-      ]
-    },
-    {
-      id: 8,
-      title: "SEO Content Schrijver",
-      company: "Contenthuis",
-      rating: 4.6,
-      location: "Thuiswerken",
-      remote: true,
-      salaryMin: 2000, salaryMax: 2700,
-      type: "Freelance",
-      posted: 3,
-      apply: true,
-      intro: "Jij schrijft teksten die scoren in Google en die mensen echt willen lezen. Sterk in taal, slim met zoekwoorden.",
-      doen: [
-        "Schrijven van blogs, categorieteksten en landingspaginas",
-        "Zoekwoordonderzoek vertalen naar heldere content",
-        "Optimaliseren van bestaande teksten voor SEO",
-        "Afstemmen met de marketeers over planning en doelen"
-      ],
-      vragen: [
-        "Uitstekende schrijfvaardigheid in het Nederlands",
-        "Kennis van SEO en zoekwoordonderzoek",
-        "Ervaring met tools zoals Surfer of Ahrefs is een plus",
-        "Zelfstandig en in staat om deadlines te halen"
-      ],
-      bieden: [
-        "Een tarief passend bij 2.000 tot 2.700 euro per maand",
-        "Vaste stroom aan opdrachten",
-        "Volledige vrijheid in tijd en plaats",
-        "Een team dat je content serieus neemt"
-      ]
-    },
-    {
-      id: 9,
-      title: "Webshop Beheerder (Shopify)",
-      company: "Kleur en Co",
-      rating: 4.4,
-      location: "Remote",
-      remote: true,
-      salaryMin: 2300, salaryMax: 2900,
-      type: "Fulltime",
-      posted: 6,
-      apply: false,
-      intro: "Jij houdt de webshop dagelijks draaiend en verzorgd. Producten, content en aanbiedingen, alles staat door jou perfect online.",
-      doen: [
-        "Beheren van producten, collecties en voorraad",
-        "Bijwerken van content, banners en acties",
-        "Signaleren en oplossen van kleine technische issues",
-        "Samenwerken met marketing rond campagnes"
-      ],
-      vragen: [
-        "Ervaring met Shopify of een vergelijkbaar platform",
-        "Handig, zorgvuldig en oplossingsgericht",
-        "Basisgevoel voor content en beeld",
-        "Zelfstandig en betrouwbaar in het opvolgen van taken"
-      ],
-      bieden: [
-        "Salaris tussen 2.300 en 2.900 euro per maand",
-        "Een afwisselende, praktische rol",
-        "Volledig remote met een vast team",
-        "Ruimte om te groeien richting e-commerce"
-      ]
-    },
-    {
-      id: 10,
-      title: "Klantenservice Teamlead",
-      company: "Remote Opus",
-      rating: 4.8,
-      location: "Remote (EU tijdzone)",
-      remote: true,
-      salaryMin: 3000, salaryMax: 3700,
-      type: "Fulltime",
-      posted: 4,
-      apply: true,
-      intro: "Jij leidt een remote klantenserviceteam naar topprestaties. Je coacht, stuurt bij en houdt de kwaliteit hoog.",
-      doen: [
-        "Aansturen en coachen van een team van medewerkers",
-        "Bewaken van servicelevels en klanttevredenheid",
-        "Opstellen van roosters en verdelen van het werk",
-        "Verbeteren van processen en werkinstructies"
-      ],
-      vragen: [
-        "Ervaring met het aansturen van een klantenserviceteam",
-        "Sterk in coachen, motiveren en feedback geven",
-        "Goed overzicht en gevoel voor prioriteiten",
-        "Vloeiend in Nederlands en Engels"
-      ],
-      bieden: [
-        "Salaris tussen 3.000 en 3.700 euro per maand",
-        "Een leidende rol in een groeiend team",
-        "Volledig remote met veel eigen verantwoordelijkheid",
-        "Doorgroeimogelijkheden richting operations"
-      ]
-    },
-    {
-      id: 11,
-      title: "Video Editor",
-      company: "Motion Lab",
-      rating: 4.5,
-      location: "Remote",
-      remote: true,
-      salaryMin: 2400, salaryMax: 3000,
-      type: "Freelance",
-      posted: 5,
-      apply: false,
-      intro: "Jij maakt van ruwe beelden vloeiende videos die blijven hangen. Snel, strak en met gevoel voor ritme.",
-      doen: [
-        "Monteren van social videos, reels en advertenties",
-        "Toevoegen van ondertiteling, muziek en effecten",
-        "Aanleveren in de juiste formaten per platform",
-        "Meedenken over concept en verhaallijn"
-      ],
-      vragen: [
-        "Sterk in Premiere Pro en After Effects",
-        "Portfolio met korte, pakkende videocontent",
-        "Gevoel voor timing, muziek en montage",
-        "Zelfstandig en snel schakelend"
-      ],
-      bieden: [
-        "Een tarief passend bij 2.400 tot 3.000 euro per maand",
-        "Doorlopende opdrachten voor meerdere merken",
-        "Volledige creatieve vrijheid",
-        "Werken wanneer en waar jij wil"
-      ]
-    },
-    {
-      id: 12,
-      title: "E-mail Marketeer (Klaviyo)",
-      company: "Bloom Studio",
-      rating: 4.6,
-      location: "Remote",
-      remote: true,
-      salaryMin: 2600, salaryMax: 3300,
-      type: "Fulltime",
-      posted: 1,
-      apply: true,
-      intro: "Jij bouwt e-mailflows die klanten laten terugkomen. Van welkomstreeks tot winback, jij haalt omzet uit elke verzending.",
-      doen: [
-        "Opzetten en optimaliseren van geautomatiseerde flows",
-        "Ontwerpen en plannen van campagnes in Klaviyo",
-        "Segmenteren van doelgroepen voor maximale relevantie",
-        "A/B testen en rapporteren over resultaten"
-      ],
-      vragen: [
-        "Ervaring met Klaviyo of vergelijkbare e-mailplatformen",
-        "Gevoel voor copy, timing en conversie",
-        "Analytisch en resultaatgericht",
-        "Zelfstandig en gestructureerd in je werk"
-      ],
-      bieden: [
-        "Salaris tussen 2.600 en 3.300 euro per maand",
-        "Werken met sterke merken en echte budgetten",
-        "Volledig remote met flexibele uren",
-        "Een team dat e-mail als groeikanaal serieus neemt"
-      ]
-    }
+    { id:1, title:"Senior E-commerce Manager", company:"Remote Opus", rating:4.8, location:"Remote (EU tijdzone)", remote:true, salaryMin:3200, salaryMax:4100, type:"Fulltime", posted:0, apply:true,
+      intro:"Jij stuurt de complete online groei aan van een snelgroeiend e-commerce merk. Van strategie tot uitvoering, met een remote team dat op jou rekent.",
+      doen:["De e-commerce strategie vertalen naar concrete kwartaaldoelen","Aansturen van een klein team van marketeers en specialisten","Optimaliseren van conversie, gemiddelde orderwaarde en retentie","Rapporteren over omzet, marge en groei aan het management"],
+      vragen:["Minimaal 4 jaar ervaring in een e-commerce of online marketing rol","Sterk in data, analyse en het nemen van onderbouwde beslissingen","Uitstekende beheersing van Nederlands en Engels","Zelfstandig, gestructureerd en comfortabel met remote werken"],
+      bieden:["Een marktconform salaris tussen 3.200 en 4.100 euro per maand","Volledig remote met flexibele werktijden","Een jaarlijks opleidingsbudget van 1.500 euro","Twee teamweken per jaar op locatie"] },
+
+    { id:2, title:"Virtual Assistant", company:"Bloom Studio", rating:4.6, location:"Thuiswerken", remote:true, salaryMin:1800, salaryMax:2400, type:"Fulltime", posted:1, apply:true,
+      intro:"Als Virtual Assistant word je de rechterhand van de oprichter. Je houdt de dagelijkse operatie soepel en zorgt dat niets blijft liggen.",
+      doen:["Beheren van de agenda, inbox en afspraken","Voorbereiden van documenten, presentaties en rapportages","Coordineren van kleine projecten en opvolgen van deadlines","Contact met leveranciers en klanten waar nodig"],
+      vragen:["Ervaring als assistent, office manager of vergelijkbaar","Zeer georganiseerd en proactief van instelling","Vloeiend in Nederlands, goede kennis van Engels","Bekend met tools als Google Workspace, Notion en Slack"],
+      bieden:["Salaris tussen 1.800 en 2.400 euro per maand","Een warme, informele werksfeer","Volledige vrijheid om je dag zelf in te delen","Ruimte om door te groeien naar operations"] },
+
+    { id:3, title:"Klantenservice Medewerker (NL)", company:"Kavro E-commerce", rating:4.4, location:"Remote", remote:true, salaryMin:2000, salaryMax:2600, type:"Fulltime", posted:2, apply:true,
+      intro:"Jij bent de stem van het merk richting duizenden klanten. Vriendelijk, snel en oplossingsgericht, elke dag opnieuw.",
+      doen:["Beantwoorden van vragen via e-mail, chat en telefoon","Oplossen van bestellingen, retouren en klachten","Signaleren van terugkerende problemen aan het team","Bewaken van een hoge klanttevredenheid"],
+      vragen:["Ervaring in klantenservice is een sterke plus","Uitstekende schriftelijke en mondelinge uitdrukkingsvaardigheid","Geduldig, empathisch en stressbestendig","Betrouwbare internetverbinding en een rustige werkplek"],
+      bieden:["Salaris tussen 2.000 en 2.600 euro per maand","Duidelijke inwerkperiode en doorlopende training","Werken in roosters die passen bij jouw leven","Een hecht remote team met dagelijkse check-ins"] },
+
+    { id:4, title:"Social Media Manager", company:"Northbrand Agency", rating:4.7, location:"Remote", remote:true, salaryMin:2400, salaryMax:3100, type:"Fulltime", posted:2, apply:false,
+      intro:"Jij bedenkt en beheert de social kanalen van meerdere merken. Van contentkalender tot community, jij houdt het levendig.",
+      doen:["Opstellen van maandelijkse contentkalenders per merk","Creeren van posts, reels en stories in de juiste tone of voice","Beheren van de community en reageren op berichten","Analyseren van resultaten en bijsturen waar nodig"],
+      vragen:["Aantoonbare ervaring met social media voor merken","Gevoel voor beeld, tekst en trends","Handig met tools als Meta Business Suite en Canva","Zelfstandig en creatief, met oog voor planning"],
+      bieden:["Salaris tussen 2.400 en 3.100 euro per maand","Werken met uiteenlopende, inspirerende merken","Volledig remote met veel creatieve vrijheid","Een team van specialisten om van te leren"] },
+
+    { id:5, title:"Google Ads Specialist (SEA)", company:"Remote Opus", rating:4.8, location:"Remote (EU tijdzone)", remote:true, salaryMin:2800, salaryMax:3600, type:"Fulltime", posted:3, apply:true,
+      intro:"Jij haalt het maximale uit advertentiebudgetten. Met scherpe campagnes en constante optimalisatie laat je de omzet groeien.",
+      doen:["Opzetten en beheren van Google Ads en Shopping campagnes","Dagelijks optimaliseren op basis van data en doelen","A/B testen van advertenties, biedingen en doelgroepen","Rapporteren over rendement en advieswerk richting klanten"],
+      vragen:["Minimaal 2 jaar ervaring met Google Ads en SEA","Sterk analytisch en cijfermatig ingesteld","Ervaring met Google Analytics en tag management","Resultaatgericht en altijd op zoek naar verbetering"],
+      bieden:["Salaris tussen 2.800 en 3.600 euro per maand","Certificeringen en trainingen volledig vergoed","Werken met serieuze mediabudgetten","Volledig remote met flexibele uren"] },
+
+    { id:6, title:"Grafisch Ontwerper", company:"Studio Vonk", rating:4.5, location:"Remote", remote:true, salaryMin:2200, salaryMax:2900, type:"Freelance", posted:4, apply:false,
+      intro:"Jij vertaalt merken naar sterk visueel werk. Van social visuals tot complete campagnes, alles met een herkenbare stijl.",
+      doen:["Ontwerpen voor social, web, e-mail en advertenties","Bewaken van de huisstijl over alle uitingen heen","Samenwerken met marketeers en copywriters","Aanleveren van nette, productieklare bestanden"],
+      vragen:["Sterk portfolio met commercieel ontwerpwerk","Vaardig in de Adobe Creative Cloud en Figma","Oog voor detail, typografie en compositie","Zelfstandig werkend en goed in plannen"],
+      bieden:["Een uurtarief passend bij 2.200 tot 2.900 euro per maand","Langdurige samenwerking met vaste opdrachten","Veel creatieve vrijheid en vertrouwen","Directe lijnen, weinig bureaucratie"] },
+
+    { id:7, title:"Boekhouder en Financieel Assistent", company:"Ledger en Co", rating:4.3, location:"Remote", remote:true, salaryMin:2500, salaryMax:3200, type:"Parttime", posted:5, apply:true,
+      intro:"Jij houdt de administratie strak en overzichtelijk. Betrouwbaar, nauwkeurig en altijd op tijd met de cijfers.",
+      doen:["Verwerken van inkoop- en verkoopfacturen","Voorbereiden van btw-aangiftes en maandafsluitingen","Bewaken van debiteuren en crediteuren","Ondersteunen bij rapportages en jaarafsluiting"],
+      vragen:["Ervaring met boekhouding of financiele administratie","Nauwkeurig, discreet en goed georganiseerd","Bekend met boekhoudsoftware zoals Exact of Moneybird","Goede beheersing van het Nederlands"],
+      bieden:["Salaris op fulltime basis tussen 2.500 en 3.200 euro","Parttime invulling van 24 tot 32 uur per week","Volledig remote met rustige, geregelde werkdagen","Een stabiele, langdurige rol"] },
+
+    { id:8, title:"SEO Content Schrijver", company:"Contenthuis", rating:4.6, location:"Thuiswerken", remote:true, salaryMin:2000, salaryMax:2700, type:"Freelance", posted:3, apply:true,
+      intro:"Jij schrijft teksten die scoren in Google en die mensen echt willen lezen. Sterk in taal, slim met zoekwoorden.",
+      doen:["Schrijven van blogs, categorieteksten en landingspaginas","Zoekwoordonderzoek vertalen naar heldere content","Optimaliseren van bestaande teksten voor SEO","Afstemmen met de marketeers over planning en doelen"],
+      vragen:["Uitstekende schrijfvaardigheid in het Nederlands","Kennis van SEO en zoekwoordonderzoek","Ervaring met tools zoals Surfer of Ahrefs is een plus","Zelfstandig en in staat om deadlines te halen"],
+      bieden:["Een tarief passend bij 2.000 tot 2.700 euro per maand","Vaste stroom aan opdrachten","Volledige vrijheid in tijd en plaats","Een team dat je content serieus neemt"] },
+
+    { id:9, title:"Webshop Beheerder (Shopify)", company:"Kleur en Co", rating:4.4, location:"Remote", remote:true, salaryMin:2300, salaryMax:2900, type:"Fulltime", posted:6, apply:false,
+      intro:"Jij houdt de webshop dagelijks draaiend en verzorgd. Producten, content en aanbiedingen, alles staat door jou perfect online.",
+      doen:["Beheren van producten, collecties en voorraad","Bijwerken van content, banners en acties","Signaleren en oplossen van kleine technische issues","Samenwerken met marketing rond campagnes"],
+      vragen:["Ervaring met Shopify of een vergelijkbaar platform","Handig, zorgvuldig en oplossingsgericht","Basisgevoel voor content en beeld","Zelfstandig en betrouwbaar in het opvolgen van taken"],
+      bieden:["Salaris tussen 2.300 en 2.900 euro per maand","Een afwisselende, praktische rol","Volledig remote met een vast team","Ruimte om te groeien richting e-commerce"] },
+
+    { id:10, title:"Klantenservice Teamlead", company:"Remote Opus", rating:4.8, location:"Remote (EU tijdzone)", remote:true, salaryMin:3000, salaryMax:3700, type:"Fulltime", posted:4, apply:true,
+      intro:"Jij leidt een remote klantenserviceteam naar topprestaties. Je coacht, stuurt bij en houdt de kwaliteit hoog.",
+      doen:["Aansturen en coachen van een team van medewerkers","Bewaken van servicelevels en klanttevredenheid","Opstellen van roosters en verdelen van het werk","Verbeteren van processen en werkinstructies"],
+      vragen:["Ervaring met het aansturen van een klantenserviceteam","Sterk in coachen, motiveren en feedback geven","Goed overzicht en gevoel voor prioriteiten","Vloeiend in Nederlands en Engels"],
+      bieden:["Salaris tussen 3.000 en 3.700 euro per maand","Een leidende rol in een groeiend team","Volledig remote met veel eigen verantwoordelijkheid","Doorgroeimogelijkheden richting operations"] },
+
+    { id:11, title:"Video Editor", company:"Motion Lab", rating:4.5, location:"Remote", remote:true, salaryMin:2400, salaryMax:3000, type:"Freelance", posted:5, apply:false,
+      intro:"Jij maakt van ruwe beelden vloeiende videos die blijven hangen. Snel, strak en met gevoel voor ritme.",
+      doen:["Monteren van social videos, reels en advertenties","Toevoegen van ondertiteling, muziek en effecten","Aanleveren in de juiste formaten per platform","Meedenken over concept en verhaallijn"],
+      vragen:["Sterk in Premiere Pro en After Effects","Portfolio met korte, pakkende videocontent","Gevoel voor timing, muziek en montage","Zelfstandig en snel schakelend"],
+      bieden:["Een tarief passend bij 2.400 tot 3.000 euro per maand","Doorlopende opdrachten voor meerdere merken","Volledige creatieve vrijheid","Werken wanneer en waar jij wil"] },
+
+    { id:12, title:"E-mail Marketeer (Klaviyo)", company:"Bloom Studio", rating:4.6, location:"Remote", remote:true, salaryMin:2600, salaryMax:3300, type:"Fulltime", posted:1, apply:true,
+      intro:"Jij bouwt e-mailflows die klanten laten terugkomen. Van welkomstreeks tot winback, jij haalt omzet uit elke verzending.",
+      doen:["Opzetten en optimaliseren van geautomatiseerde flows","Ontwerpen en plannen van campagnes in Klaviyo","Segmenteren van doelgroepen voor maximale relevantie","A/B testen en rapporteren over resultaten"],
+      vragen:["Ervaring met Klaviyo of vergelijkbare e-mailplatformen","Gevoel voor copy, timing en conversie","Analytisch en resultaatgericht","Zelfstandig en gestructureerd in je werk"],
+      bieden:["Salaris tussen 2.600 en 3.300 euro per maand","Werken met sterke merken en echte budgetten","Volledig remote met flexibele uren","Een team dat e-mail als groeikanaal serieus neemt"] }
   ];
 
-  /* ─────────────  STATE  ───────────── */
-  const state = {
-    what: "",
-    where: "",
-    type: "all",
-    date: "all",
-    salary: 0,
-    remoteOnly: false,
-    sort: "relevance",
-    selectedId: null
+  /* ==================== ICONS ==================== */
+  const IC = {
+    pin:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
+    money:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01"/><path d="M18 12h.01"/></svg>',
+    laptop:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg>',
+    briefcase:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>',
+    star:'<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>',
+    arrow:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>',
+    back:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>'
   };
+  const bookmarkIcon = function (filled) {
+    return '<svg width="20" height="20" viewBox="0 0 24 24" fill="' + (filled ? 'currentColor' : 'none') +
+      '" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>';
+  };
+
+  /* ==================== STATE ==================== */
+  const state = { what:"", where:"", type:"all", date:"all", salary:0, remoteOnly:false, sort:"relevance", selectedId:null };
   const saved = new Set();
 
-  /* ─────────────  HELPERS  ───────────── */
-  function euro(n) {
-    return n.toLocaleString("nl-NL");
+  /* ==================== HELPERS ==================== */
+  function euro(n) { return n.toLocaleString("nl-NL"); }
+  function postedLabel(d) { return d === 0 ? "Vandaag geplaatst" : d === 1 ? "1 dag geleden geplaatst" : d + " dagen geleden geplaatst"; }
+  function monogram(name) {
+    const parts = name.replace(/[^A-Za-z ]/g, "").trim().split(/\s+/);
+    return ((parts[0] ? parts[0][0] : "") + (parts[1] ? parts[1][0] : "")).toUpperCase() || name[0].toUpperCase();
   }
 
-  function postedLabel(days) {
-    if (days === 0) return "Vandaag geplaatst";
-    if (days === 1) return "1 dag geleden geplaatst";
-    return days + " dagen geleden geplaatst";
-  }
-
-  function starIcon() {
-    return '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="none">' +
-      '<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>';
-  }
-
-  /* ─────────────  FILTER + SORT  ───────────── */
+  /* ==================== FILTER + SORT ==================== */
   function getFiltered() {
     let list = jobs.filter(function (j) {
       if (state.what) {
         const q = state.what.toLowerCase();
-        const hay = (j.title + " " + j.company + " " + j.type).toLowerCase();
-        if (hay.indexOf(q) === -1) return false;
+        if ((j.title + " " + j.company + " " + j.type).toLowerCase().indexOf(q) === -1) return false;
       }
       if (state.where) {
         const w = state.where.toLowerCase();
-        const loc = j.location.toLowerCase();
         const remoteWord = (w.indexOf("remote") !== -1 || w.indexOf("thuis") !== -1);
-        if (!(loc.indexOf(w) !== -1 || (remoteWord && j.remote))) return false;
+        if (!(j.location.toLowerCase().indexOf(w) !== -1 || (remoteWord && j.remote))) return false;
       }
       if (state.type !== "all" && j.type !== state.type) return false;
       if (state.date !== "all" && j.posted > parseInt(state.date, 10)) return false;
@@ -1334,65 +1000,54 @@
       if (state.remoteOnly && !j.remote) return false;
       return true;
     });
-
-    if (state.sort === "date") {
-      list.sort(function (a, b) { return a.posted - b.posted; });
-    } else if (state.sort === "salary") {
-      list.sort(function (a, b) { return b.salaryMax - a.salaryMax; });
-    }
+    if (state.sort === "date") list.sort(function (a, b) { return a.posted - b.posted; });
+    else if (state.sort === "salary") list.sort(function (a, b) { return b.salaryMax - a.salaryMax; });
     return list;
   }
 
-  /* ─────────────  RENDER LIST  ───────────── */
+  /* ==================== RENDER LIST ==================== */
   function renderList() {
     const list = getFiltered();
     const container = document.getElementById("jobList");
     const count = document.getElementById("resultsCount");
 
-    let queryNote = "";
+    let note = "";
     if (state.what || state.where) {
-      const parts = [];
-      if (state.what) parts.push('"' + state.what + '"');
-      if (state.where) parts.push("in " + '<span class="results-query">' + state.where + "</span>");
-      queryNote = " voor " + parts.join(" ");
+      const p = [];
+      if (state.what) p.push('"' + state.what + '"');
+      if (state.where) p.push('in <span class="results-query">' + state.where + "</span>");
+      note = " voor " + p.join(" ");
     }
-    count.innerHTML = "<strong>" + list.length + "</strong> " +
-      (list.length === 1 ? "vacature" : "vacatures") + queryNote;
+    count.innerHTML = "<strong>" + list.length + "</strong> " + (list.length === 1 ? "vacature" : "vacatures") + note;
 
     if (list.length === 0) {
-      container.innerHTML = '<div class="job-card" style="cursor:default;text-align:center;color:#566860;">' +
-        "Geen vacatures gevonden. Pas je zoekopdracht of filters aan.</div>";
+      container.innerHTML = '<div class="job-card" style="cursor:default;text-align:center;color:#56675E;">Geen vacatures gevonden. Pas je zoekopdracht of filters aan.</div>';
       renderDetail(null);
       return;
     }
-
-    if (!list.some(function (j) { return j.id === state.selectedId; })) {
-      state.selectedId = list[0].id;
-    }
+    if (!list.some(function (j) { return j.id === state.selectedId; })) state.selectedId = list[0].id;
 
     container.innerHTML = list.map(function (j) {
       const tags = [];
       if (j.posted <= 1) tags.push('<span class="tag new">Nieuw</span>');
       if (j.apply) tags.push('<span class="tag apply">Snel solliciteren</span>');
-      tags.push('<span class="tag type">' + j.type + '</span>');
+      tags.push('<span class="tag type">' + j.type + "</span>");
 
-      return '<article class="job-card' + (j.id === state.selectedId ? " active" : "") +
-        '" data-id="' + j.id + '">' +
-        "<h3>" + j.title + "</h3>" +
-        '<div class="job-company"><span>' + j.company + "</span>" +
-        '<span class="job-rating">' + starIcon() + j.rating.toFixed(1) + "</span></div>" +
-        '<div class="job-meta">' +
-          '<div class="row">' +
-            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>' +
-            j.location +
+      return '<article class="job-card' + (j.id === state.selectedId ? " active" : "") + '" data-id="' + j.id + '">' +
+          '<div class="jc-top">' +
+            '<div class="avatar">' + monogram(j.company) + "</div>" +
+            '<div class="jc-head">' +
+              "<h3>" + j.title + "</h3>" +
+              '<div class="jc-company"><span>' + j.company + "</span>" +
+                '<span class="rating">' + IC.star + j.rating.toFixed(1) + "</span></div>" +
+            "</div>" +
           "</div>" +
-          '<div class="row salary">' +
-            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>' +
-            euro(j.salaryMin) + " - " + euro(j.salaryMax) + " euro per maand" +
+          '<div class="jc-meta">' +
+            '<div class="meta-row">' + IC.pin + j.location + "</div>" +
+            '<div class="meta-row salary">' + IC.money + euro(j.salaryMin) + " - " + euro(j.salaryMax) + " euro per maand</div>" +
           "</div>" +
-        "</div>" +
-        '<div class="job-tags">' + tags.join("") + "</div>" +
-        '<div class="job-posted">' + postedLabel(j.posted) + "</div>" +
+          '<div class="jc-tags">' + tags.join("") + "</div>" +
+          '<div class="jc-posted">' + postedLabel(j.posted) + "</div>" +
         "</article>";
     }).join("");
 
@@ -1400,7 +1055,6 @@
       el.addEventListener("click", function () {
         state.selectedId = parseInt(el.getAttribute("data-id"), 10);
         renderList();
-        renderDetail(jobs.find(function (j) { return j.id === state.selectedId; }));
         if (window.matchMedia("(max-width: 900px)").matches) {
           document.getElementById("detail").classList.add("open");
           document.body.style.overflow = "hidden";
@@ -1411,129 +1065,84 @@
     renderDetail(jobs.find(function (j) { return j.id === state.selectedId; }));
   }
 
-  /* ─────────────  RENDER DETAIL  ───────────── */
+  /* ==================== RENDER DETAIL ==================== */
   function renderDetail(j) {
     const d = document.getElementById("detail");
-    if (!j) {
-      d.innerHTML = '<div class="detail-empty">Selecteer een vacature om de details te bekijken.</div>';
-      return;
-    }
-
+    if (!j) { d.innerHTML = '<div class="detail-empty">Selecteer een vacature om de details te bekijken.</div>'; return; }
     const isSaved = saved.has(j.id);
-
-    function bulletList(items) {
-      return "<ul>" + items.map(function (i) { return "<li>" + i + "</li>"; }).join("") + "</ul>";
-    }
+    function ul(items) { return "<ul>" + items.map(function (i) { return "<li>" + i + "</li>"; }).join("") + "</ul>"; }
 
     d.innerHTML =
-      '<button class="detail-back" type="button" id="detailBack">' +
-        '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>' +
-        "Terug naar vacatures</button>" +
+      '<button class="detail-back" type="button" id="detailBack">' + IC.back + "Terug naar vacatures</button>" +
       '<div class="detail-head">' +
-        "<h2>" + j.title + "</h2>" +
-        '<div class="detail-company"><span class="name">' + j.company + "</span>" +
-          '<span class="job-rating">' + starIcon() + j.rating.toFixed(1) + "</span></div>" +
-        '<div class="detail-sub">' +
-          '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>' +
-          j.location + "</div>" +
+        '<div class="avatar">' + monogram(j.company) + "</div>" +
+        "<div><h2>" + j.title + "</h2>" +
+          '<div class="detail-company"><span class="name">' + j.company + "</span>" +
+            '<span class="rating">' + IC.star + j.rating.toFixed(1) + "</span></div></div>" +
       "</div>" +
       '<div class="detail-facts">' +
-        '<div class="fact"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>' +
-          "<div><strong>" + euro(j.salaryMin) + " - " + euro(j.salaryMax) + " euro</strong><span>per maand</span></div></div>" +
-        '<div class="fact"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"></rect><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"></path></svg>' +
-          "<div><strong>" + j.type + "</strong><span>dienstverband</span></div></div>" +
-        '<div class="fact"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>' +
-          "<div><strong>Remote</strong><span>thuiswerken</span></div></div>" +
+        '<div class="fact"><span class="fact-ic">' + IC.money + '</span><div class="fact-tx"><strong>' + euro(j.salaryMin) + " - " + euro(j.salaryMax) + '</strong><span>euro per maand</span></div></div>' +
+        '<div class="fact"><span class="fact-ic">' + IC.briefcase + '</span><div class="fact-tx"><strong>' + j.type + '</strong><span>dienstverband</span></div></div>' +
+        '<div class="fact"><span class="fact-ic">' + IC.laptop + '</span><div class="fact-tx"><strong>Remote</strong><span>' + j.location + '</span></div></div>' +
       "</div>" +
       '<div class="detail-actions">' +
-        '<button class="apply-btn" id="applyBtn">Solliciteer nu' +
-          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>' +
-        '<button class="save-btn' + (isSaved ? " saved" : "") + '" id="saveBtn" title="Bewaar vacature">' +
-          '<svg width="20" height="20" viewBox="0 0 24 24" fill="' + (isSaved ? "currentColor" : "none") + '" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></button>' +
+        '<button class="apply-btn" id="applyBtn">Solliciteer nu' + IC.arrow + "</button>" +
+        '<button class="save-btn' + (isSaved ? " saved" : "") + '" id="saveBtn" title="Bewaar vacature">' + bookmarkIcon(isSaved) + "</button>" +
       "</div>" +
-      '<div class="detail-body">' +
-        "<p>" + j.intro + "</p>" +
-        "<h4>Wat je gaat doen</h4>" + bulletList(j.doen) +
-        "<h4>Wat wij vragen</h4>" + bulletList(j.vragen) +
-        "<h4>Wat wij bieden</h4>" + bulletList(j.bieden) +
-      "</div>" +
-      '<div class="detail-foot">' + postedLabel(j.posted) +
-        ". Deze vacature wordt aangeboden via Remote Opus.</div>";
+      '<div class="detail-body"><p>' + j.intro + "</p>" +
+        "<h4>Wat je gaat doen</h4>" + ul(j.doen) +
+        "<h4>Wat wij vragen</h4>" + ul(j.vragen) +
+        "<h4>Wat wij bieden</h4>" + ul(j.bieden) + "</div>" +
+      '<div class="detail-foot">' + postedLabel(j.posted) + ". Deze vacature wordt aangeboden via Remote Opus.</div>";
 
-    const backBtn = document.getElementById("detailBack");
-    if (backBtn) {
-      backBtn.addEventListener("click", function () {
-        d.classList.remove("open");
-        document.body.style.overflow = "";
-      });
-    }
-
+    const back = document.getElementById("detailBack");
+    if (back) back.addEventListener("click", function () { d.classList.remove("open"); document.body.style.overflow = ""; });
     document.getElementById("saveBtn").addEventListener("click", function () {
-      if (saved.has(j.id)) { saved.delete(j.id); } else { saved.add(j.id); }
+      if (saved.has(j.id)) saved.delete(j.id); else saved.add(j.id);
       renderDetail(j);
     });
-
-    document.getElementById("applyBtn").addEventListener("click", function () {
-      window.location.href = "https://remote-opus.com/kennismaking/";
-    });
+    document.getElementById("applyBtn").addEventListener("click", function () { window.location.href = "https://remote-opus.com/kennismaking/"; });
   }
 
-  /* ─────────────  FILTER DROPDOWN LOGIC  ───────────── */
+  /* ==================== FILTER DROPDOWNS ==================== */
   Array.prototype.forEach.call(document.querySelectorAll(".filter-dropdown"), function (dd) {
     const btn = dd.querySelector(".filter-btn");
-    const filterKey = dd.getAttribute("data-filter");
+    const key = dd.getAttribute("data-filter");
     const defaultLabel = btn.textContent;
 
     btn.addEventListener("click", function (e) {
       e.stopPropagation();
-      const wasOpen = dd.classList.contains("open");
-      closeAllDropdowns();
-      if (!wasOpen) dd.classList.add("open");
+      const open = dd.classList.contains("open");
+      closeAll();
+      if (!open) dd.classList.add("open");
     });
 
     Array.prototype.forEach.call(dd.querySelectorAll(".filter-option"), function (opt) {
       opt.addEventListener("click", function () {
-        Array.prototype.forEach.call(dd.querySelectorAll(".filter-option"), function (o) {
-          o.classList.remove("chosen");
-        });
+        Array.prototype.forEach.call(dd.querySelectorAll(".filter-option"), function (o) { o.classList.remove("chosen"); });
         opt.classList.add("chosen");
-        const value = opt.getAttribute("data-value");
-        const isDefault = (value === "all" || value === "0" || value === "relevance");
-
-        if (filterKey === "type") state.type = value;
-        if (filterKey === "date") state.date = value;
-        if (filterKey === "salary") state.salary = parseInt(value, 10);
-        if (filterKey === "sort") state.sort = value;
-
-        if (filterKey === "sort") {
-          btn.textContent = opt.textContent;
-        } else {
-          btn.textContent = isDefault ? defaultLabel : opt.textContent;
-          btn.classList.toggle("selected", !isDefault);
-        }
-
+        const v = opt.getAttribute("data-value");
+        const isDefault = (v === "all" || v === "0" || v === "relevance");
+        if (key === "type") state.type = v;
+        if (key === "date") state.date = v;
+        if (key === "salary") state.salary = parseInt(v, 10);
+        if (key === "sort") state.sort = v;
+        if (key === "sort") { btn.textContent = opt.textContent; }
+        else { btn.textContent = isDefault ? defaultLabel : opt.textContent; btn.classList.toggle("selected", !isDefault); }
         dd.classList.remove("open");
         renderList();
       });
     });
   });
+  function closeAll() { Array.prototype.forEach.call(document.querySelectorAll(".filter-dropdown.open"), function (o) { o.classList.remove("open"); }); }
+  document.addEventListener("click", closeAll);
 
-  function closeAllDropdowns() {
-    Array.prototype.forEach.call(document.querySelectorAll(".filter-dropdown.open"), function (o) {
-      o.classList.remove("open");
-    });
-  }
-
-  document.addEventListener("click", closeAllDropdowns);
-
-  /* ─────────────  REMOTE TOGGLE  ───────────── */
+  /* ==================== REMOTE TOGGLE + SEARCH ==================== */
   document.getElementById("remoteToggle").addEventListener("click", function () {
     state.remoteOnly = !state.remoteOnly;
     this.classList.toggle("active", state.remoteOnly);
     renderList();
   });
-
-  /* ─────────────  SEARCH FORM  ───────────── */
   document.getElementById("searchForm").addEventListener("submit", function (e) {
     e.preventDefault();
     state.what = document.getElementById("whatInput").value.trim();
@@ -1541,18 +1150,8 @@
     renderList();
   });
 
-  /* ─────────────  MOBILE NAV DROPDOWN  ───────────── */
-  (function () {
-    function isMobile() { return window.matchMedia("(max-width: 768px)").matches; }
-    document.addEventListener("click", function (e) {
-      const trigger = e.target.closest(".nav-links li.has-dropdown > a");
-      if (!trigger || !isMobile()) return;
-      e.preventDefault();
-      trigger.parentElement.classList.toggle("open");
-    });
-  })();
-
-  /* ─────────────  INIT  ───────────── */
+  /* ==================== INIT ==================== */
+  document.getElementById("heroCount").textContent = jobs.length;
   renderList();
 </script>
 
