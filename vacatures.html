@@ -653,21 +653,16 @@
   .site-footer {
     background: var(--green-900);
     color: #cfe0d6;
-    padding-block: 2.4rem;
+    padding-block: 1.8rem;
     margin-top: 1rem;
   }
   .footer-inner {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 1.2rem;
-    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
   }
-  .footer-brand { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: #fff; }
-  .footer-links { display: flex; gap: 1.4rem; flex-wrap: wrap; }
-  .footer-links a { font-size: 0.88rem; color: #b6cdc0; transition: color .15s; }
-  .footer-links a:hover { color: #fff; }
-  .footer-copy { width: 100%; font-size: 0.8rem; color: #7f9a8a; margin-top: 0.6rem; }
+  .footer-copy { font-size: 0.82rem; color: #9fb6a8; }
 
   /* ==================== RESPONSIVE BOARD ==================== */
   @media (max-width: 900px) {
@@ -695,6 +690,186 @@
     .search-btn { padding: 15px; border-radius: var(--r-md); margin-top: 2px; }
     .detail-facts { grid-template-columns: 1fr; }
   }
+
+  /* ==================== ACCOUNT CHIP ==================== */
+  .account-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    border: 1.5px solid var(--green-200);
+    border-radius: 50px;
+    padding: 0.3rem 0.75rem 0.3rem 0.35rem;
+    background: var(--panel);
+    transition: border-color .15s, background .15s;
+  }
+  .account-chip:hover { border-color: var(--green-600); background: var(--green-50); }
+  .account-chip .aav {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--green-800);
+    color: #fff;
+    display: grid; place-items: center;
+    font-size: 0.78rem; font-weight: 700;
+  }
+  .account-chip .aname { font-size: 0.85rem; font-weight: 600; color: var(--green-800); }
+
+  /* ==================== AUTH / ONBOARDING MODAL ==================== */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    background: rgba(15,35,24,0.55);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 24px 18px;
+    overflow-y: auto;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--panel);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-md);
+    width: 100%;
+    max-width: 520px;
+    margin: auto;
+    position: relative;
+    animation: modalIn .25s ease;
+  }
+  @keyframes modalIn { from { opacity: 0; transform: translateY(12px) scale(.99); } to { opacity: 1; transform: none; } }
+  .modal-close {
+    position: absolute;
+    top: 14px; right: 14px;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    border: none;
+    background: var(--green-50);
+    color: var(--green-800);
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+    display: grid; place-items: center;
+    z-index: 2;
+  }
+  .modal-close:hover { background: var(--green-100); }
+  .modal-body { padding: clamp(1.6rem, 4vw, 2.4rem); }
+  .step { display: none; }
+  .step.active { display: block; animation: promoFade .35s ease; }
+
+  .auth-head { text-align: center; margin-bottom: 1.4rem; }
+  .auth-logo { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--green-800); }
+  .auth-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.4rem, 3vw, 1.8rem); color: var(--green-900); margin: 0.55rem 0 0.35rem; letter-spacing: -0.01em; }
+  .auth-sub { color: var(--ink-soft); font-size: 0.94rem; margin: 0; line-height: 1.5; }
+
+  .google-btn {
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border: 1.5px solid var(--line);
+    border-radius: 50px;
+    background: #fff;
+    font-size: 0.98rem; font-weight: 600; color: #3c4043;
+    cursor: pointer;
+    transition: box-shadow .15s, border-color .15s;
+  }
+  .google-btn:hover { box-shadow: var(--shadow-sm); border-color: var(--green-200); }
+  .auth-fine { font-size: 0.76rem; color: var(--ink-soft); text-align: center; margin: 1.1rem 0 0; line-height: 1.5; }
+
+  .role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .role-card {
+    border: 1.5px solid var(--line);
+    border-radius: var(--r-md);
+    padding: 1.5rem 1.1rem;
+    text-align: center;
+    cursor: pointer;
+    background: var(--panel);
+    transition: border-color .15s, background .15s, transform .12s;
+  }
+  .role-card:hover { border-color: var(--green-600); background: var(--green-50); transform: translateY(-2px); }
+  .role-ic { width: 54px; height: 54px; border-radius: 14px; background: var(--green-100); color: var(--green-700); display: grid; place-items: center; margin: 0 auto 0.85rem; }
+  .role-card h4 { margin: 0 0 0.35rem; font-size: 1.02rem; color: var(--green-800); }
+  .role-card p { margin: 0; font-size: 0.83rem; color: var(--ink-soft); line-height: 1.45; }
+  @media (max-width: 460px) { .role-grid { grid-template-columns: 1fr; } }
+
+  .field { margin-bottom: 1rem; }
+  .field.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .field label, .flabel { display: block; font-size: 0.85rem; font-weight: 600; color: var(--green-800); margin-bottom: 0.4rem; }
+  .input, .select, .textarea {
+    width: 100%;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--ink);
+    padding: 0.72rem 0.85rem;
+    border: 1.5px solid var(--line);
+    border-radius: var(--r-sm);
+    background: var(--panel);
+    outline: none;
+    transition: border-color .15s;
+  }
+  .input:focus, .select:focus, .textarea:focus { border-color: var(--green-600); }
+  .textarea { resize: vertical; min-height: 110px; line-height: 1.5; }
+  .file-drop {
+    display: block;
+    border: 1.5px dashed var(--green-200);
+    border-radius: var(--r-md);
+    padding: 1.1rem;
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: border-color .15s, background .15s, color .15s;
+  }
+  .file-drop:hover { border-color: var(--green-600); background: var(--green-50); }
+  .file-drop.has-file { border-style: solid; border-color: var(--green-600); color: var(--green-800); background: var(--green-50); font-weight: 600; }
+
+  .toggle-row { display: flex; gap: 10px; }
+  .toggle-opt {
+    flex: 1; text-align: center;
+    padding: 0.72rem;
+    border: 1.5px solid var(--line);
+    border-radius: var(--r-sm);
+    cursor: pointer;
+    font-size: 0.9rem; font-weight: 600; color: var(--ink-soft);
+    background: var(--panel);
+    transition: all .15s;
+  }
+  .toggle-opt.active { border-color: var(--green-800); background: var(--green-800); color: #fff; }
+
+  .flabel-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.4rem; gap: 10px; }
+  .ai-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.78rem; font-weight: 600; color: var(--green-700);
+    background: var(--green-100);
+    border: 1px solid var(--green-200);
+    padding: 0.35rem 0.7rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background .15s;
+    white-space: nowrap;
+  }
+  .ai-btn:hover { background: var(--green-200); }
+  .ai-hint { font-size: 0.76rem; color: var(--green-700); margin-top: 0.4rem; display: none; }
+  .ai-hint.show { display: block; }
+
+  .field-err { color: #B4462F; font-size: 0.78rem; margin-top: 0.35rem; display: none; }
+  .field-err.show { display: block; }
+
+  .modal-actions { display: flex; gap: 10px; align-items: center; margin-top: 1.5rem; }
+  .btn-primary {
+    flex: 1;
+    background: var(--green-800); color: #fff;
+    border: none; border-radius: 50px;
+    font-size: 0.95rem; font-weight: 600;
+    padding: 0.85rem; cursor: pointer;
+    transition: background .18s, transform .15s;
+  }
+  .btn-primary:hover { background: var(--green-600); transform: translateY(-1px); }
+  .btn-ghost { background: none; border: none; color: var(--ink-soft); font-size: 0.9rem; font-weight: 600; cursor: pointer; padding: 0.6rem 0.5rem; }
+  .btn-ghost:hover { color: var(--green-800); }
+
+  .done-ic { width: 72px; height: 72px; border-radius: 50%; background: var(--green-100); color: var(--green-600); display: grid; place-items: center; margin: 0 auto 1rem; }
 </style>
 </head>
 <body>
@@ -704,19 +879,22 @@
   <div class="container header-inner">
     <a class="brand" href="https://remote-opus.com/home-page/">
       <span class="brand-name">Remote Opus</span>
-      <span class="brand-sub">Vacatures</span>
     </a>
     <nav class="header-nav">
-      <a class="hnav-link employers" href="https://remote-opus.com/e-commerce-page/">Voor werkgevers</a>
+      <a class="hnav-link employers" href="#" data-auth="hirer">Voor werkgevers</a>
       <a class="hnav-link" href="https://remote-opus.com/contact-page/">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
         <span class="support-label">Support</span>
       </a>
-      <a class="btn-outline" href="#">
+      <a class="btn-outline" href="#" id="loginBtn">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
         Inloggen
       </a>
-      <a class="btn-solid header-cta" href="https://remote-opus.com/kennismaking/">Plaats een vacature</a>
+      <button class="account-chip" id="accountChip" type="button" style="display:none;">
+        <span class="aav" id="accInit">A</span>
+        <span class="aname" id="accName">Account</span>
+      </button>
+      <a class="btn-solid header-cta" href="#" data-auth="hirer">Plaats een vacature</a>
     </nav>
   </div>
 </header>
@@ -729,17 +907,17 @@
         <div class="promo-content active">
           <span class="promo-label">Voor werkgevers</span>
           <h2 class="promo-title">Plaats <b>gratis</b> een vacature en bouw sneller je remote team.</h2>
-          <a class="promo-btn" href="https://remote-opus.com/kennismaking/">Plaats een vacature</a>
+          <a class="promo-btn" href="#" data-auth="hirer">Plaats een vacature</a>
         </div>
         <div class="promo-content">
           <span class="promo-label">Sneller aannemen</span>
           <h2 class="promo-title">Vind <b>2.3x sneller</b> de juiste remote professional voor jouw team.</h2>
-          <a class="promo-btn" href="https://remote-opus.com/kennismaking/">Plan een gesprek</a>
+          <a class="promo-btn" href="#" data-auth="hirer">Plan een gesprek</a>
         </div>
         <div class="promo-content">
           <span class="promo-label">Bespaar op kosten</span>
           <h2 class="promo-title">Neem tot <b>3x voordeliger</b> aan dan met een lokale medewerker.</h2>
-          <a class="promo-btn" href="https://remote-opus.com/kennismaking/">Bereken je besparing</a>
+          <a class="promo-btn" href="#" data-auth="hirer">Bereken je besparing</a>
         </div>
       </div>
       <div class="promo-art">
@@ -845,17 +1023,252 @@
 <!-- ==================== FOOTER ==================== -->
 <footer class="site-footer">
   <div class="container footer-inner">
-    <div class="footer-brand">Remote Opus</div>
-    <nav class="footer-links">
-      <a href="https://remote-opus.com/e-commerce-page/">E-commerce bedrijven</a>
-      <a href="https://remote-opus.com/agencies/">Agencies en Bureaus</a>
-      <a href="https://remote-opus.com/tarieven-page/">Tarieven</a>
-      <a href="https://remote-opus.com/over-ons-2/">Over ons</a>
-      <a href="https://remote-opus.com/contact-page/">Contact</a>
-    </nav>
-    <div class="footer-copy">Remote Opus. Remote talent voor e-commerce bedrijven en agencies.</div>
+    <div class="footer-copy">Remote Opus BVK. Alle rechten voorbehouden. &copy; 2026</div>
   </div>
 </footer>
+
+<!-- ==================== AUTH / ONBOARDING MODAL ==================== -->
+<div class="modal-overlay" id="authModal">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" type="button" aria-label="Sluiten">&times;</button>
+    <div class="modal-body">
+
+      <!-- login -->
+      <div class="step active" data-step="login">
+        <div class="auth-head">
+          <div class="auth-logo">Remote Opus</div>
+          <h3 class="auth-title">Welkom</h3>
+          <p class="auth-sub">Log in om te solliciteren of om een vacature te plaatsen.</p>
+        </div>
+        <button class="google-btn" id="googleBtn" type="button">
+          <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+          Doorgaan met Google
+        </button>
+        <p class="auth-fine">Door verder te gaan ga je akkoord met de voorwaarden en het privacybeleid van Remote Opus.</p>
+      </div>
+
+      <!-- role -->
+      <div class="step" data-step="role">
+        <div class="auth-head">
+          <h3 class="auth-title">Wat brengt je hier?</h3>
+          <p class="auth-sub">Kies waarmee we je kunnen helpen.</p>
+        </div>
+        <div class="role-grid">
+          <div class="role-card" data-role="seeker">
+            <div class="role-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+            <h4>Ik zoek werk</h4>
+            <p>Maak een profiel en solliciteer op remote vacatures.</p>
+          </div>
+          <div class="role-card" data-role="hirer">
+            <div class="role-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M16 6h.01M8 10h.01M16 10h.01M8 14h.01M16 14h.01"/></svg></div>
+            <h4>Ik wil aannemen</h4>
+            <p>Plaats een vacature en vind remote professionals.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- basics -->
+      <div class="step" data-step="basics">
+        <div class="auth-head">
+          <h3 class="auth-title">Vertel ons wie je bent</h3>
+          <p class="auth-sub">We hebben een paar gegevens nodig om je account op te zetten.</p>
+        </div>
+        <div class="field row2">
+          <div>
+            <label>Voornaam</label>
+            <input class="input" id="fName" type="text" placeholder="Voornaam">
+            <div class="field-err" data-for="fName">Vul je voornaam in.</div>
+          </div>
+          <div>
+            <label>Achternaam</label>
+            <input class="input" id="lName" type="text" placeholder="Achternaam">
+            <div class="field-err" data-for="lName">Vul je achternaam in.</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>E-mailadres</label>
+          <input class="input" id="email" type="email" placeholder="jij@voorbeeld.nl">
+          <div class="field-err" data-for="email">Vul een geldig e-mailadres in.</div>
+        </div>
+        <div class="field">
+          <label>Telefoonnummer</label>
+          <input class="input" id="phone" type="tel" placeholder="+31 6 12345678">
+          <div class="field-err" data-for="phone">Vul je telefoonnummer in.</div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn-ghost" type="button" data-back="role">Terug</button>
+          <button class="btn-primary" type="button" id="basicsNext">Doorgaan</button>
+        </div>
+      </div>
+
+      <!-- seeker profile -->
+      <div class="step" data-step="seeker">
+        <div class="auth-head">
+          <h3 class="auth-title">Maak je profiel compleet</h3>
+          <p class="auth-sub">Hoe completer je profiel, hoe sneller je gematcht wordt.</p>
+        </div>
+        <div class="field">
+          <label>Vakgebied of specialisatie</label>
+          <select class="select" id="sSpec">
+            <option value="">Kies je vakgebied</option>
+            <option>E-commerce</option>
+            <option>Klantenservice</option>
+            <option>Marketing</option>
+            <option>SEO en content</option>
+            <option>Design</option>
+            <option>Development</option>
+            <option>Video en montage</option>
+            <option>Administratie en finance</option>
+            <option>Virtual assistant</option>
+            <option>Anders</option>
+          </select>
+          <div class="field-err" data-for="sSpec">Kies je vakgebied.</div>
+        </div>
+        <div class="field">
+          <label>Vaardigheden</label>
+          <input class="input" id="sSkills" type="text" placeholder="Bijvoorbeeld: SEO, copywriting, Shopify">
+        </div>
+        <div class="field row2">
+          <div>
+            <label>Jaren ervaring</label>
+            <select class="select" id="sExp">
+              <option value="">Kies</option>
+              <option>0 tot 1 jaar</option>
+              <option>1 tot 3 jaar</option>
+              <option>3 tot 5 jaar</option>
+              <option>5 jaar of meer</option>
+            </select>
+          </div>
+          <div>
+            <label>Beschikbaarheid</label>
+            <select class="select" id="sAvail">
+              <option value="">Kies</option>
+              <option>Fulltime</option>
+              <option>Parttime</option>
+              <option>Freelance</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label>Korte introductie</label>
+          <textarea class="textarea" id="sBio" placeholder="Vertel kort iets over jezelf en wat je zoekt."></textarea>
+        </div>
+        <div class="field">
+          <label>CV uploaden</label>
+          <label class="file-drop" id="cvDrop" for="cvInput"><span id="cvText">Klik om je CV te uploaden (PDF of Word)</span></label>
+          <input type="file" id="cvInput" accept=".pdf,.doc,.docx" style="display:none">
+        </div>
+        <div class="modal-actions">
+          <button class="btn-ghost" type="button" data-back="basics">Terug</button>
+          <button class="btn-primary" type="button" id="seekerSubmit">Profiel opslaan</button>
+        </div>
+      </div>
+
+      <!-- hirer questions -->
+      <div class="step" data-step="hirer">
+        <div class="auth-head">
+          <h3 class="auth-title">Over je bedrijf</h3>
+          <p class="auth-sub">Nog een paar vragen voordat je je vacature plaatst.</p>
+        </div>
+        <div class="field">
+          <label>Bedrijfsnaam</label>
+          <input class="input" id="hCompany" type="text" placeholder="Naam van je bedrijf">
+          <div class="field-err" data-for="hCompany">Vul je bedrijfsnaam in.</div>
+        </div>
+        <div class="field">
+          <label>Website (optioneel)</label>
+          <input class="input" id="hSite" type="text" placeholder="www.jouwbedrijf.nl">
+        </div>
+        <div class="field row2">
+          <div>
+            <label>Aantal medewerkers</label>
+            <select class="select" id="hSize">
+              <option value="">Kies</option>
+              <option>1 tot 10</option>
+              <option>11 tot 50</option>
+              <option>51 tot 200</option>
+              <option>200 of meer</option>
+            </select>
+          </div>
+          <div>
+            <label>Waarvoor zoek je hulp?</label>
+            <select class="select" id="hCat">
+              <option value="">Kies een categorie</option>
+              <option>Marketing</option>
+              <option>Klantenservice</option>
+              <option>E-commerce beheer</option>
+              <option>Design</option>
+              <option>Development</option>
+              <option>Administratie</option>
+              <option>Anders</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn-ghost" type="button" data-back="basics">Terug</button>
+          <button class="btn-primary" type="button" id="hirerNext">Doorgaan naar vacature</button>
+        </div>
+      </div>
+
+      <!-- job description builder -->
+      <div class="step" data-step="jd">
+        <div class="auth-head">
+          <h3 class="auth-title">Maak je vacature</h3>
+          <p class="auth-sub">Vul de basis in. Wij helpen met het salaris en de omschrijving.</p>
+        </div>
+        <div class="field">
+          <label>Functietitel</label>
+          <input class="input" id="jTitle" type="text" placeholder="Bijvoorbeeld: SEO Specialist">
+          <div class="field-err" data-for="jTitle">Vul een functietitel in.</div>
+        </div>
+        <div class="field">
+          <label>Dienstverband</label>
+          <div class="toggle-row" id="jType">
+            <div class="toggle-opt active" data-val="Fulltime">Fulltime</div>
+            <div class="toggle-opt" data-val="Parttime">Parttime</div>
+            <div class="toggle-opt" data-val="Freelance">Freelance</div>
+          </div>
+        </div>
+        <div class="field">
+          <div class="flabel-row">
+            <span class="flabel">Salarisindicatie per maand</span>
+            <button type="button" class="ai-btn" id="salaryAi"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.6 4.6L18 8l-4.4 1.4L12 14l-1.6-4.6L6 8l4.4-1.4L12 2z"/><path d="M19 14l.7 2.1L22 17l-2.3.9L19 20l-.7-2.1L16 17l2.3-.9L19 14z"/></svg>Genereer met AI</button>
+          </div>
+          <div class="field row2" style="margin-bottom:0">
+            <div><input class="input" id="jSalMin" type="text" placeholder="Min. in euro"></div>
+            <div><input class="input" id="jSalMax" type="text" placeholder="Max. in euro"></div>
+          </div>
+          <div class="ai-hint" id="salaryHint">AI-suggestie op basis van de functietitel en marktdata. Pas gerust aan.</div>
+        </div>
+        <div class="field">
+          <div class="flabel-row">
+            <span class="flabel">Functieomschrijving</span>
+            <button type="button" class="ai-btn" id="descAi"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.6 4.6L18 8l-4.4 1.4L12 14l-1.6-4.6L6 8l4.4-1.4L12 2z"/><path d="M19 14l.7 2.1L22 17l-2.3.9L19 20l-.7-2.1L16 17l2.3-.9L19 14z"/></svg>Verrijk met AI</button>
+          </div>
+          <textarea class="textarea" id="jDesc" placeholder="Beschrijf kort de rol en klik daarna op Verrijk met AI." style="min-height:150px"></textarea>
+          <div class="ai-hint" id="descHint">AI heeft je omschrijving aangevuld. Pas gerust aan.</div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn-ghost" type="button" data-back="hirer">Terug</button>
+          <button class="btn-primary" type="button" id="jdSubmit">Vacature plaatsen</button>
+        </div>
+      </div>
+
+      <!-- done -->
+      <div class="step" data-step="done">
+        <div class="auth-head">
+          <div class="done-ic"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+          <h3 class="auth-title" id="doneTitle">Gelukt</h3>
+          <p class="auth-sub" id="doneMsg">Klaar.</p>
+        </div>
+        <div class="modal-actions">
+          <button class="btn-primary" type="button" id="doneClose">Sluiten</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 <script>
   /* ==================== JOB DATA ==================== */
@@ -964,8 +1377,10 @@
   function getFiltered() {
     let list = jobs.filter(function (j) {
       if (state.what) {
-        const q = state.what.toLowerCase();
-        if ((j.title + " " + j.company + " " + j.type).toLowerCase().indexOf(q) === -1) return false;
+        const hay = (j.title + " " + j.company + " " + j.type + " " + j.location + " " +
+          j.intro + " " + j.doen.join(" ") + " " + j.vragen.join(" ") + " " + j.bieden.join(" ")).toLowerCase();
+        const tokens = state.what.toLowerCase().split(/\s+/).filter(Boolean);
+        if (!tokens.every(function (t) { return hay.indexOf(t) !== -1; })) return false;
       }
       if (state.where) {
         const w = state.where.toLowerCase();
@@ -1079,7 +1494,7 @@
       if (saved.has(j.id)) saved.delete(j.id); else saved.add(j.id);
       renderDetail(j);
     });
-    document.getElementById("applyBtn").addEventListener("click", function () { window.location.href = "https://remote-opus.com/kennismaking/"; });
+    document.getElementById("applyBtn").addEventListener("click", function () { if (window.__roAuth) window.__roAuth("seeker"); });
   }
 
   /* ==================== FILTER DROPDOWNS ==================== */
@@ -1147,6 +1562,191 @@
     var card = document.querySelector(".promo-card");
     if (card) { card.addEventListener("mouseenter", stop); card.addEventListener("mouseleave", start); }
     start();
+  })();
+
+  /* ==================== AUTH / ONBOARDING ==================== */
+  (function () {
+    var modal = document.getElementById("authModal");
+    if (!modal) return;
+    var steps = modal.querySelectorAll(".step");
+    var currentRole = null, pendingRole = null, jdType = "Fulltime";
+    var session = null;
+    try { session = JSON.parse(localStorage.getItem("ro_session") || "null"); } catch (e) { session = null; }
+
+    function save() { try { localStorage.setItem("ro_session", JSON.stringify(session)); } catch (e) {} }
+    function go(name) {
+      Array.prototype.forEach.call(steps, function (s) { s.classList.toggle("active", s.getAttribute("data-step") === name); });
+      modal.scrollTop = 0;
+    }
+    function openModal() { modal.classList.add("open"); document.body.style.overflow = "hidden"; }
+    function closeModal() { modal.classList.remove("open"); document.body.style.overflow = ""; }
+
+    function start(role) {
+      pendingRole = role || null;
+      openModal();
+      if (session && session.loggedIn) { afterLogin(); }
+      else { go("login"); }
+    }
+    window.__roAuth = start;
+
+    function afterLogin() {
+      if (pendingRole) {
+        currentRole = pendingRole;
+        go(session && session.basicsDone ? pendingRole : "basics");
+      } else {
+        go("role");
+      }
+    }
+
+    function updateHeader() {
+      var loginBtn = document.getElementById("loginBtn");
+      var chip = document.getElementById("accountChip");
+      if (!loginBtn || !chip) return;
+      if (session && session.loggedIn) {
+        loginBtn.style.display = "none";
+        chip.style.display = "inline-flex";
+        var nm = session.first || "Account";
+        document.getElementById("accName").textContent = nm;
+        document.getElementById("accInit").textContent = (nm.charAt(0) || "A").toUpperCase();
+      } else {
+        loginBtn.style.display = "";
+        chip.style.display = "none";
+      }
+    }
+
+    function setErr(id, show) { var e = modal.querySelector('.field-err[data-for="' + id + '"]'); if (e) e.classList.toggle("show", show); }
+    function req(id) { var el = document.getElementById(id); var ok = !!(el && el.value.trim()); setErr(id, !ok); return ok; }
+    function reqMail(id) { var el = document.getElementById(id); var ok = !!(el && /.+@.+\..+/.test(el.value.trim())); setErr(id, !ok); return ok; }
+
+    function euroFmt(n) { return n.toLocaleString("nl-NL"); }
+    function aiSalary(title) {
+      var t = (title || "").toLowerCase(), min = 2300, max = 3100;
+      if (/(head|lead|manager|teamlead|director|hoofd)/.test(t)) { min = 3200; max = 4300; }
+      else if (/senior/.test(t)) { min = 3000; max = 4000; }
+      else if (/(specialist|marketeer|developer|ontwikkelaar|designer|ontwerper|editor|analist|consultant|strateeg)/.test(t)) { min = 2600; max = 3500; }
+      else if (/(assistant|assistent|medewerker|support|service|junior|starter|entry)/.test(t)) { min = 1900; max = 2600; }
+      return { min: min, max: max };
+    }
+    function aiDesc(title, short, type) {
+      title = (title || "deze rol").trim();
+      short = (short || "").trim();
+      var intro = short ? short : "Voor een groeiend team zoeken wij een " + title + ". In deze remote rol werk je zelfstandig en heb je veel eigen verantwoordelijkheid.";
+      if (!/[.!?]$/.test(intro)) intro += ".";
+      var doen = [
+        "De dagelijkse taken binnen de rol zelfstandig oppakken en opvolgen",
+        "Nauw samenwerken met een remote team met korte lijnen",
+        "Resultaten meten en verbeteren waar dat kan",
+        "Meedenken over hoe het slimmer en beter kan"
+      ];
+      var vragen = [
+        "Aantoonbare ervaring in een vergelijkbare functie",
+        "Zelfstandig, gestructureerd en communicatief sterk",
+        "Goede beheersing van het Nederlands en Engels",
+        "Een betrouwbare internetverbinding en een rustige werkplek"
+      ];
+      var bieden = [
+        "Een " + (type || "Fulltime").toLowerCase() + " remote functie met flexibele werktijden",
+        "Marktconform salaris en ruimte om te groeien",
+        "Een hecht team dat je begeleidt en ondersteunt"
+      ];
+      var out = intro + "\n\nWat je gaat doen:\n";
+      doen.forEach(function (d) { out += "- " + d + "\n"; });
+      out += "\nWat wij vragen:\n";
+      vragen.forEach(function (d) { out += "- " + d + "\n"; });
+      out += "\nWat wij bieden:\n";
+      bieden.forEach(function (d) { out += "- " + d + "\n"; });
+      return out;
+    }
+
+    function setDone(title, msg) {
+      document.getElementById("doneTitle").textContent = title;
+      document.getElementById("doneMsg").textContent = msg;
+      go("done");
+    }
+
+    /* triggers */
+    Array.prototype.forEach.call(document.querySelectorAll("[data-auth]"), function (b) {
+      b.addEventListener("click", function (e) { e.preventDefault(); start(b.getAttribute("data-auth")); });
+    });
+    var loginBtn = document.getElementById("loginBtn");
+    if (loginBtn) loginBtn.addEventListener("click", function (e) { e.preventDefault(); start(null); });
+    var chip = document.getElementById("accountChip");
+    if (chip) chip.addEventListener("click", function () {
+      if (window.confirm("Wil je uitloggen?")) { session = null; try { localStorage.removeItem("ro_session"); } catch (e) {} updateHeader(); }
+    });
+
+    document.getElementById("modalClose").addEventListener("click", closeModal);
+    modal.addEventListener("click", function (e) { if (e.target === modal) closeModal(); });
+    Array.prototype.forEach.call(modal.querySelectorAll("[data-back]"), function (b) {
+      b.addEventListener("click", function () { go(b.getAttribute("data-back")); });
+    });
+
+    document.getElementById("googleBtn").addEventListener("click", function () {
+      session = session || {};
+      session.loggedIn = true;
+      save(); updateHeader();
+      afterLogin();
+    });
+
+    Array.prototype.forEach.call(modal.querySelectorAll(".role-card"), function (c) {
+      c.addEventListener("click", function () { currentRole = c.getAttribute("data-role"); go("basics"); });
+    });
+
+    document.getElementById("basicsNext").addEventListener("click", function () {
+      var a = req("fName"), b = req("lName"), c = reqMail("email"), d = req("phone");
+      if (!(a && b && c && d)) return;
+      session = session || {}; session.loggedIn = true; session.basicsDone = true;
+      session.first = document.getElementById("fName").value.trim();
+      session.email = document.getElementById("email").value.trim();
+      save(); updateHeader();
+      go(currentRole === "hirer" ? "hirer" : "seeker");
+    });
+
+    document.getElementById("seekerSubmit").addEventListener("click", function () {
+      if (!req("sSpec")) return;
+      setDone("Profiel opgeslagen", "Je profiel is compleet. We nemen contact op zodra er een passende vacature is.");
+    });
+
+    document.getElementById("hirerNext").addEventListener("click", function () {
+      if (!req("hCompany")) return;
+      go("jd");
+    });
+
+    var cvInput = document.getElementById("cvInput");
+    if (cvInput) cvInput.addEventListener("change", function () {
+      if (cvInput.files && cvInput.files.length) {
+        document.getElementById("cvText").textContent = cvInput.files[0].name;
+        document.getElementById("cvDrop").classList.add("has-file");
+      }
+    });
+
+    Array.prototype.forEach.call(modal.querySelectorAll("#jType .toggle-opt"), function (o) {
+      o.addEventListener("click", function () {
+        Array.prototype.forEach.call(modal.querySelectorAll("#jType .toggle-opt"), function (x) { x.classList.remove("active"); });
+        o.classList.add("active"); jdType = o.getAttribute("data-val");
+      });
+    });
+
+    document.getElementById("salaryAi").addEventListener("click", function () {
+      var s = aiSalary(document.getElementById("jTitle").value);
+      document.getElementById("jSalMin").value = euroFmt(s.min);
+      document.getElementById("jSalMax").value = euroFmt(s.max);
+      document.getElementById("salaryHint").classList.add("show");
+    });
+    document.getElementById("descAi").addEventListener("click", function () {
+      var el = document.getElementById("jDesc");
+      el.value = aiDesc(document.getElementById("jTitle").value, el.value, jdType);
+      document.getElementById("descHint").classList.add("show");
+    });
+
+    document.getElementById("jdSubmit").addEventListener("click", function () {
+      if (!req("jTitle")) return;
+      setDone("Vacature geplaatst", "Je vacature is ontvangen. Ons team neemt contact op om hem live te zetten.");
+    });
+
+    document.getElementById("doneClose").addEventListener("click", closeModal);
+
+    updateHeader();
   })();
 
   /* ==================== INIT ==================== */
