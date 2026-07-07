@@ -881,7 +881,7 @@
       <span class="brand-name">Remote Opus</span>
     </a>
     <nav class="header-nav">
-      <a class="hnav-link employers" href="#" data-auth="hirer">Voor werkgevers</a>
+      <a class="hnav-link employers" href="werkgevers.html">Voor werkgevers</a>
       <a class="hnav-link" href="https://remote-opus.com/contact-page/">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
         <span class="support-label">Support</span>
@@ -1747,6 +1747,14 @@
     document.getElementById("doneClose").addEventListener("click", closeModal);
 
     updateHeader();
+
+    /* deep links from the employers page */
+    try {
+      var qs = new URLSearchParams(window.location.search);
+      if (qs.get("title")) { var jt = document.getElementById("jTitle"); if (jt) jt.value = qs.get("title"); }
+      if (qs.get("post")) { start("hirer"); }
+      else if (qs.get("login")) { start(null); }
+    } catch (e) {}
   })();
 
   /* ==================== INIT ==================== */

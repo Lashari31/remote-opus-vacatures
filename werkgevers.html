@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="https://remote-opus.com/wp-content/uploads/2025/01/cropped-DByy2b1.png">
+<title>Voor werkgevers - Remote Opus</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-900: #0F2318;
+    --green-800: #1A4731;
+    --green-700: #235E40;
+    --green-600: #2E7D52;
+    --green-400: #6B8F7A;
+    --green-200: #C8E0D4;
+    --green-100: #E8F5EE;
+    --green-50:  #F3FAF6;
+
+    --body-bg:   #FFFFFF;
+    --panel:     #FFFFFF;
+    --ink:       #17221C;
+    --ink-soft:  #56675E;
+    --line:      #E3EDE7;
+
+    --header-h:  66px;
+    --maxw:      1160px;
+
+    --r-lg: 18px;
+    --r-md: 13px;
+    --r-sm: 10px;
+
+    --shadow-xs: 0 1px 2px rgba(15,35,24,.05);
+    --shadow-sm: 0 2px 6px rgba(15,35,24,.06), 0 10px 26px rgba(15,35,24,.05);
+    --shadow-md: 0 16px 40px rgba(15,35,24,.12);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--ink);
+    background: var(--body-bg);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; }
+
+  .container {
+    width: 100%;
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding-inline: clamp(16px, 4vw, 40px);
+  }
+
+  @media (max-width: 768px) { :root { --header-h: 58px; } }
+
+  /* ==================== HEADER ==================== */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    height: var(--header-h);
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .header-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .brand-name { font-family: 'DM Serif Display', serif; font-size: 1.42rem; color: var(--green-800); letter-spacing: -0.02em; line-height: 1; }
+  .header-nav { display: flex; align-items: center; gap: 0.4rem; }
+  .hnav-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--ink-soft); font-size: 0.88rem; font-weight: 500;
+    padding: 0.5rem 0.75rem; border-radius: var(--r-sm);
+    transition: color .15s, background .15s;
+  }
+  .hnav-link:hover { color: var(--green-800); background: var(--green-50); }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: 0.88rem; font-weight: 600; color: var(--green-800);
+    padding: 0.55rem 1.1rem; border: 1.5px solid var(--green-200); border-radius: 50px;
+    transition: border-color .15s, background .15s;
+  }
+  .btn-outline:hover { border-color: var(--green-600); background: var(--green-50); }
+  .btn-solid {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.88rem; font-weight: 600; color: #fff; background: var(--green-800);
+    padding: 0.6rem 1.25rem; border-radius: 50px;
+    transition: background .18s, transform .15s;
+  }
+  .btn-solid:hover { background: var(--green-600); transform: translateY(-1px); }
+
+  @media (max-width: 900px) {
+    .hnav-link.hide-sm { display: none; }
+  }
+  @media (max-width: 560px) {
+    .btn-outline.hide-xs { display: none; }
+  }
+
+  /* ==================== HERO ==================== */
+  .emp-hero {
+    background: linear-gradient(160deg, var(--green-50) 0%, var(--green-100) 100%);
+    border-bottom: 1px solid var(--line);
+  }
+  .emp-hero-inner {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+    padding-block: clamp(2.6rem, 6vw, 4.6rem);
+  }
+  .emp-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em;
+    color: var(--green-700); background: rgba(255,255,255,0.75);
+    border: 1px solid var(--green-200); padding: 6px 14px; border-radius: 50px; margin-bottom: 1.1rem;
+  }
+  .emp-eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green-600); }
+  .emp-hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.1rem, 5vw, 3.3rem);
+    line-height: 1.1; color: var(--green-900);
+    margin: 0 0 1rem; letter-spacing: -0.015em;
+  }
+  .emp-hero h1 .accent { color: var(--green-600); }
+  .emp-hero .lead { font-size: clamp(1rem, 2vw, 1.15rem); line-height: 1.6; color: var(--ink-soft); margin: 0 0 1.8rem; max-width: 520px; }
+
+  .post-form {
+    display: flex; align-items: stretch; gap: 6px;
+    background: var(--panel); border: 1px solid var(--green-200);
+    border-radius: var(--r-lg); box-shadow: var(--shadow-md); padding: 7px; max-width: 520px;
+  }
+  .post-form .pf-field { display: flex; align-items: center; gap: 10px; flex: 1; padding: 0 6px 0 14px; }
+  .post-form svg { color: var(--green-600); flex-shrink: 0; }
+  .post-form input { border: none; outline: none; font-family: inherit; font-size: 0.98rem; color: var(--ink); width: 100%; padding: 14px 0; background: transparent; }
+  .post-form input::placeholder { color: #98a89f; }
+  .post-form button {
+    background: var(--green-800); color: #fff; border: none; border-radius: var(--r-md);
+    font-size: 0.95rem; font-weight: 600; padding: 0 22px; cursor: pointer;
+    transition: background .18s, transform .15s; white-space: nowrap;
+  }
+  .post-form button:hover { background: var(--green-600); transform: translateY(-1px); }
+  .hero-note { margin-top: 0.9rem; font-size: 0.85rem; color: var(--ink-soft); }
+  .hero-note strong { color: var(--green-800); }
+
+  /* dashboard mockup */
+  .dash-mock {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg);
+    box-shadow: var(--shadow-md); padding: 1.3rem 1.4rem;
+  }
+  .dash-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+  .dash-title { font-weight: 700; color: var(--green-800); font-size: 1.02rem; }
+  .dash-badge { font-size: 0.74rem; font-weight: 600; color: var(--green-700); background: var(--green-100); padding: 4px 10px; border-radius: 50px; }
+  .cand { display: flex; align-items: center; gap: 12px; padding: 0.75rem 0; border-top: 1px solid var(--line); }
+  .cand:first-of-type { border-top: none; }
+  .cand-av { width: 40px; height: 40px; border-radius: 10px; background: var(--green-100); border: 1px solid var(--green-200); color: var(--green-800); display: grid; place-items: center; font-weight: 700; font-size: 0.9rem; }
+  .cand-info { flex: 1; min-width: 0; }
+  .cand-info strong { display: block; font-size: 0.9rem; color: var(--ink); }
+  .cand-info span { font-size: 0.8rem; color: var(--ink-soft); }
+  .cand-match { font-size: 0.82rem; font-weight: 700; color: var(--green-600); background: var(--green-50); border: 1px solid var(--green-200); padding: 4px 9px; border-radius: 50px; }
+
+  @media (max-width: 860px) {
+    .emp-hero-inner { grid-template-columns: 1fr; }
+    .dash-mock { max-width: 460px; }
+  }
+  @media (max-width: 560px) {
+    .post-form { flex-direction: column; }
+    .post-form .pf-field { padding: 4px 12px; }
+    .post-form button { padding: 14px; border-radius: var(--r-md); }
+  }
+
+  /* ==================== SECTION BASICS ==================== */
+  section.block { padding-block: clamp(3rem, 6vw, 4.6rem); }
+  .sec-head { text-align: center; max-width: 640px; margin: 0 auto clamp(2rem, 4vw, 2.8rem); }
+  .sec-head h2 { font-family: 'DM Serif Display', serif; font-size: clamp(1.7rem, 3.6vw, 2.4rem); color: var(--green-900); margin: 0 0 0.7rem; letter-spacing: -0.01em; }
+  .sec-head p { margin: 0; color: var(--ink-soft); font-size: 1.02rem; line-height: 1.6; }
+
+  /* steps */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .step-card { padding: 1.6rem 1.4rem; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--panel); box-shadow: var(--shadow-xs); }
+  .step-num { width: 40px; height: 40px; border-radius: 50%; background: var(--green-800); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 1.05rem; margin-bottom: 1rem; }
+  .step-card h3 { margin: 0 0 0.5rem; font-size: 1.1rem; color: var(--green-800); }
+  .step-card p { margin: 0; color: var(--ink-soft); font-size: 0.92rem; line-height: 1.6; }
+
+  /* features */
+  .feat-wrap { background: var(--green-50); border-block: 1px solid var(--line); }
+  .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .feat-card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 1.6rem 1.4rem; box-shadow: var(--shadow-xs); }
+  .feat-ic { width: 48px; height: 48px; border-radius: var(--r-md); background: var(--green-100); color: var(--green-600); display: grid; place-items: center; margin-bottom: 1rem; }
+  .feat-card h3 { margin: 0 0 0.5rem; font-size: 1.06rem; color: var(--green-800); }
+  .feat-card p { margin: 0; color: var(--ink-soft); font-size: 0.92rem; line-height: 1.6; }
+
+  @media (max-width: 820px) {
+    .steps, .features { grid-template-columns: 1fr; gap: 16px; }
+  }
+
+  /* stat band */
+  .stat-band { background: linear-gradient(120deg, #102E1F 0%, #1A4731 55%, #235E40 100%); color: #fff; }
+  .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; padding-block: clamp(2.4rem, 5vw, 3.4rem); text-align: center; }
+  .stat-grid .num { font-size: clamp(2.1rem, 5vw, 3rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1; }
+  .stat-grid .lbl { margin-top: 0.6rem; font-size: 0.92rem; color: rgba(255,255,255,0.82); line-height: 1.5; }
+  @media (max-width: 640px) { .stat-grid { grid-template-columns: 1fr; gap: 28px; } }
+
+  /* testimonial */
+  .testi { max-width: 780px; margin: 0 auto; text-align: center; }
+  .testi-quote { font-family: 'DM Serif Display', serif; font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.4; color: var(--green-900); margin: 0 0 1.4rem; }
+  .testi-by { color: var(--ink-soft); font-size: 0.95rem; }
+  .testi-by strong { color: var(--green-800); }
+
+  /* cta band */
+  .cta-band { background: var(--green-50); border-top: 1px solid var(--line); }
+  .cta-inner { text-align: center; padding-block: clamp(2.8rem, 6vw, 4rem); }
+  .cta-inner h2 { font-family: 'DM Serif Display', serif; font-size: clamp(1.7rem, 3.6vw, 2.4rem); color: var(--green-900); margin: 0 0 1.3rem; }
+  .cta-big {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: var(--green-800); color: #fff; font-size: 1rem; font-weight: 600;
+    padding: 0.9rem 2rem; border-radius: 50px; transition: background .18s, transform .15s;
+  }
+  .cta-big:hover { background: var(--green-600); transform: translateY(-1px); }
+
+  /* faq */
+  .faq { max-width: 780px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--line); }
+  .faq-q {
+    width: 100%; text-align: left; background: none; border: none; cursor: pointer;
+    padding: 1.15rem 0; font-size: 1.02rem; font-weight: 600; color: var(--green-800);
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  }
+  .faq-q .chev { flex-shrink: 0; transition: transform .2s; color: var(--green-600); }
+  .faq-item.open .chev { transform: rotate(180deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height .25s ease; }
+  .faq-item.open .faq-a { max-height: 300px; }
+  .faq-a p { margin: 0; padding: 0 0 1.15rem; color: var(--ink-soft); font-size: 0.95rem; line-height: 1.65; }
+
+  /* footer */
+  .site-footer { background: var(--green-900); color: #cfe0d6; padding-block: 1.8rem; }
+  .footer-inner { display: flex; align-items: center; justify-content: center; text-align: center; }
+  .footer-copy { font-size: 0.82rem; color: #9fb6a8; }
+</style>
+</head>
+<body>
+
+<!-- ==================== HEADER ==================== -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="https://remote-opus.com/home-page/"><span class="brand-name">Remote Opus</span></a>
+    <nav class="header-nav">
+      <a class="hnav-link hide-sm" href="#hoe">Zo werkt het</a>
+      <a class="hnav-link hide-sm" href="https://remote-opus.com/tarieven-page/">Tarieven</a>
+      <a class="hnav-link hide-sm" href="vacatures.html">Voor werkzoekenden</a>
+      <a class="btn-outline hide-xs" href="vacatures.html?login=1">Inloggen</a>
+      <a class="btn-solid" href="vacatures.html?post=1">Vacature plaatsen</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ==================== HERO ==================== -->
+<section class="emp-hero">
+  <div class="container emp-hero-inner">
+    <div class="emp-hero-copy">
+      <span class="emp-eyebrow"><span class="dot"></span>Remote Opus voor werkgevers</span>
+      <h1>Vul je vacatures snel in met <span class="accent">remote talent</span></h1>
+      <p class="lead">Plaats gratis een vacature en wij matchen je met zorgvuldig geselecteerde professionals. Jij kiest, wij regelen de rest.</p>
+      <form class="post-form" id="postForm" autocomplete="off">
+        <div class="pf-field">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          <input type="text" id="postTitle" placeholder="Welke functie zoek je? Bijvoorbeeld SEO Specialist">
+        </div>
+        <button type="submit">Vacature plaatsen</button>
+      </form>
+      <p class="hero-note"><strong>Gratis te plaatsen.</strong> Je betaalt pas wanneer je iemand aanneemt.</p>
+    </div>
+
+    <div class="dash-mock" aria-hidden="true">
+      <div class="dash-head">
+        <span class="dash-title">Kandidaten</span>
+        <span class="dash-badge">12 nieuw</span>
+      </div>
+      <div class="cand">
+        <div class="cand-av">JV</div>
+        <div class="cand-info"><strong>Jasper de Vries</strong><span>SEO Specialist</span></div>
+        <div class="cand-match">96%</div>
+      </div>
+      <div class="cand">
+        <div class="cand-av">SN</div>
+        <div class="cand-info"><strong>Sanne Bakker</strong><span>E-commerce Manager</span></div>
+        <div class="cand-match">92%</div>
+      </div>
+      <div class="cand">
+        <div class="cand-av">RM</div>
+        <div class="cand-info"><strong>Rick Molenaar</strong><span>Social Media Manager</span></div>
+        <div class="cand-match">89%</div>
+      </div>
+      <div class="cand">
+        <div class="cand-av">LD</div>
+        <div class="cand-info"><strong>Lisa de Groot</strong><span>Virtual Assistant</span></div>
+        <div class="cand-match">87%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== STEPS ==================== -->
+<section class="block" id="hoe">
+  <div class="container">
+    <div class="sec-head">
+      <h2>Beheer je werving eenvoudig</h2>
+      <p>In drie stappen van vacature naar nieuwe collega, volledig remote en zonder gedoe.</p>
+    </div>
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Plaats je vacature</h3>
+        <p>Vul de functietitel, het dienstverband en een korte omschrijving in. Onze AI helpt met het salaris en de tekst.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Vind geschikte kandidaten</h3>
+        <p>Je ontvangt een korte lijst met vooraf gescreende professionals die passen bij je rol en cultuur.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Werf met vertrouwen</h3>
+        <p>Voer gesprekken, kies je favoriet en start de samenwerking. Wij regelen contract en administratie.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FEATURES ==================== -->
+<div class="feat-wrap">
+  <section class="block">
+    <div class="container">
+      <div class="sec-head">
+        <h2>Alles in een overzichtelijk dashboard</h2>
+        <p>Van eerste sollicitatie tot getekend contract, je houdt overzicht op een plek.</p>
+      </div>
+      <div class="features">
+        <div class="feat-card">
+          <div class="feat-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></div>
+          <h3>Slimme matching</h3>
+          <p>Kandidaten worden automatisch gerangschikt op basis van hun match met jouw eisen.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h3>Samen beslissen</h3>
+          <p>Nodig je team uit, deel notities en stem samen op de beste kandidaten.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <h3>Direct contact</h3>
+          <p>Bericht kandidaten rechtstreeks vanuit je dashboard en plan gesprekken in.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== STAT BAND ==================== -->
+<div class="stat-band">
+  <div class="container">
+    <div class="stat-grid">
+      <div><div class="num">500+</div><div class="lbl">remote professionals in ons netwerk</div></div>
+      <div><div class="num">7 dagen</div><div class="lbl">gemiddeld tot de eerste geschikte kandidaten</div></div>
+      <div><div class="num">4.8/5</div><div class="lbl">gemiddelde beoordeling van werkgevers</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TESTIMONIAL ==================== -->
+<section class="block">
+  <div class="container">
+    <div class="testi">
+      <p class="testi-quote">"Binnen twee weken hadden we een remote marketeer aan boord die perfect paste. Remote Opus nam het hele proces uit handen."</p>
+      <p class="testi-by"><strong>Marieke Jansen</strong>, oprichter van een groeiend e-commerce merk</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CTA BAND ==================== -->
+<div class="cta-band">
+  <div class="container cta-inner">
+    <h2>Klaar om je volgende teamlid te vinden?</h2>
+    <a class="cta-big" href="vacatures.html?post=1">Plaats gratis een vacature
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- ==================== FAQ ==================== -->
+<section class="block">
+  <div class="container">
+    <div class="sec-head">
+      <h2>Veelgestelde vragen</h2>
+    </div>
+    <div class="faq">
+      <div class="faq-item">
+        <button class="faq-q" type="button">Wat kost het om een vacature te plaatsen?
+          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a"><p>Een vacature plaatsen is volledig gratis. Je betaalt pas wanneer je daadwerkelijk iemand aanneemt via Remote Opus.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">Hoe snel vind ik een geschikte kandidaat?
+          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a"><p>In de meeste gevallen ontvang je binnen een week de eerste vooraf gescreende kandidaten die passen bij je vacature.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">Werken de professionals volledig remote?
+          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a"><p>Ja. Al onze professionals werken volledig op afstand, in een tijdzone die past bij jouw team.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">Hoe worden kandidaten geselecteerd?
+          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a"><p>Elke kandidaat wordt vooraf gescreend op ervaring, vaardigheden en communicatie, zodat je alleen relevante profielen ziet.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">In welke vakgebieden kunnen jullie helpen?
+          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a"><p>Onder andere e-commerce, marketing, klantenservice, design, development, video en administratie. Twijfel je? Neem gerust contact op.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">Hoe zit het met contract en betaling?
+          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a"><p>Wij regelen het contract en de administratie. Jij ontvangt een duidelijk maandbedrag zonder verrassingen.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-copy">Remote Opus BVK. Alle rechten voorbehouden. &copy; 2026</div>
+  </div>
+</footer>
+
+<script>
+  /* hero post form -> job page hire flow, prefilled with the title */
+  document.getElementById("postForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var t = document.getElementById("postTitle").value.trim();
+    window.location.href = "vacatures.html?post=1" + (t ? "&title=" + encodeURIComponent(t) : "");
+  });
+
+  /* FAQ accordion */
+  Array.prototype.forEach.call(document.querySelectorAll(".faq-item .faq-q"), function (q) {
+    q.addEventListener("click", function () { q.parentElement.classList.toggle("open"); });
+  });
+</script>
+
+</body>
+</html>
