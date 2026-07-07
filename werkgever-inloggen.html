@@ -154,20 +154,57 @@
 
 </div>
 
-<script>
-  function login() {
-    try { localStorage.setItem("ro_session", JSON.stringify({ loggedIn: true, role: "hirer" })); } catch (e) {}
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCL8CyYb7O6FQpgj97RLezwD9YeaBgAfJo",
+    authDomain: "remote-opus-sign-in.firebaseapp.com",
+    projectId: "remote-opus-sign-in",
+    storageBucket: "remote-opus-sign-in.firebasestorage.app",
+    messagingSenderId: "381818446293",
+    appId: "1:381818446293:web:63c79b80d0d9de0a61dd5c",
+    measurementId: "G-N7RC6LDN9Z"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  auth.useDeviceLanguage();
+  const googleProvider = new GoogleAuthProvider();
+
+  function finish(user) {
+    var first = (user && user.displayName) ? user.displayName.split(" ")[0] : "Account";
+    try {
+      localStorage.setItem("ro_session", JSON.stringify({
+        loggedIn: true, role: "hirer",
+        first: first, email: (user && user.email) || ""
+      }));
+    } catch (e) {}
     window.location.href = "vacatures.html?post=1";
   }
-  document.getElementById("googleBtn").addEventListener("click", login);
-  document.getElementById("appleBtn").addEventListener("click", login);
+
+  /* real Google sign-in */
+  document.getElementById("googleBtn").addEventListener("click", function () {
+    signInWithPopup(auth, googleProvider)
+      .then(function (res) { finish(res.user); })
+      .catch(function (err) {
+        if (err && err.code === "auth/popup-closed-by-user") return;
+        alert("Inloggen mislukt: " + (err && err.message ? err.message : err));
+      });
+  });
+
+  /* Apple: demo until an Apple Developer account is connected */
+  document.getElementById("appleBtn").addEventListener("click", function () { finish(null); });
+
+  /* email: demo */
   document.getElementById("loginForm").addEventListener("submit", function (e) {
     e.preventDefault();
     var em = document.getElementById("email"), pw = document.getElementById("pass");
     var okE = /.+@.+\..+/.test(em.value.trim()), okP = pw.value.trim().length > 0;
     document.getElementById("emailErr").classList.toggle("show", !okE);
     document.getElementById("passErr").classList.toggle("show", !okP);
-    if (okE && okP) login();
+    if (okE && okP) finish(null);
   });
 </script>
 </body>
